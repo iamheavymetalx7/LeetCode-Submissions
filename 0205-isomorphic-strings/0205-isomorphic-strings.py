@@ -1,3 +1,6 @@
+'''
+My approach:
+
 from collections import defaultdict,Counter
 class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
@@ -18,3 +21,22 @@ class Solution:
                 return False
         
         return True
+'''
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        vis=set()
+        dic={}
+
+        
+        for i in range(len(s)):
+            if s[i] in dic:
+                if dic[s[i]]!=t[i]:
+                    return False
+            else:
+                if t[i] in vis:
+                    return False
+                dic[s[i]]=t[i]
+                vis.add(t[i])
+        return True
+        
+        
