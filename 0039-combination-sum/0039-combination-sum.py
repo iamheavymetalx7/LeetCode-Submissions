@@ -2,7 +2,7 @@ class Solution:
     def recursion(self,candidates, target, ans,ds,index):
 
         if index>=len(candidates):
-            if target==0 and ds not in ans:
+            if target==0:
                 ans.append(ds)
             return
 
