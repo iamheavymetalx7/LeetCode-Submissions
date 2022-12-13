@@ -11,9 +11,7 @@ class Solution:
 
         
         if candidates[index]<=target:
-            ds.append(candidates[index])
-            self.recursion(candidates,target-candidates[index],ans,ds,index)
-            ds.pop()
+            self.recursion(candidates,target-candidates[index],ans,ds+[candidates[index]],index)
         self.recursion(candidates,target,ans,ds,index+1)
     
     
