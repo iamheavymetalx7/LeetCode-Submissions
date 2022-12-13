@@ -3,7 +3,7 @@ class Solution:
     def recursion(self,idx,nums,ans,ds):
         ans.append(ds)
         for i in range(idx,len(nums)):
-            if i>idx and nums[i]==nums[i-1]:
+            if i!=idx and nums[i]==nums[i-1]:
                 continue
             self.recursion(i+1,nums,ans,ds+[nums[i]])
     
