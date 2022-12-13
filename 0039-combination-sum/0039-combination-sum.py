@@ -3,7 +3,7 @@ class Solution:
 
         if index>=len(candidates):
             if target==0 and ds not in ans:
-                ans.append(ds.copy())
+                ans.append(ds)
             return
 
 # Note - I have used ds.copy() to avoid overwriting of array due to reference. You can refer to Python Deep Copy and Shallow Copy concept for more info
