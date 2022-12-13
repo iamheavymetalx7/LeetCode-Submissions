@@ -5,6 +5,10 @@ class Solution:
             if target==0 and ds not in ans:
                 ans.append(ds.copy())
             return
+
+# Note - I have used ds.copy() to avoid overwriting of array due to reference. You can refer to Python Deep Copy and Shallow Copy concept for more info
+
+
         
         if candidates[index]<=target:
             ds.append(candidates[index])
