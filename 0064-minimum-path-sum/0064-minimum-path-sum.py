@@ -14,8 +14,9 @@ class Solution:
             if dp[i][j]!=-1:
               return dp[i][j]
             
-
-            dp[i][j]=grid[i][j]+min(recur(i+1,j),recur(i,j+1))
+            dir1=grid[i][j]+recur(i+1,j)
+            dir2=grid[i][j]+recur(i,j+1)
+            dp[i][j]=min(dir1,dir2)
             
             return dp[i][j]
         return recur(0,0)
