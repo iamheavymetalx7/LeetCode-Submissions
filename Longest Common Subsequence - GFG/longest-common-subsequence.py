@@ -4,21 +4,21 @@ class Solution:
     
     #Function to find the length of longest common subsequence in two strings.
     def lcs(self,x,y,s1,s2):
-        dp=[[-1 for i in range(y)]for j in range(x)]
+        dp=[[-1 for i in range(y+1)]for j in range(x+1)]
         
         def recur(i,j):
-            if i<0 or j<0:
+            if i==0 or j==0:
                 return 0
             if dp[i][j]!=-1:
                 return dp[i][j]
-            if s1[i]==s2[j]:
+            if s1[i-1]==s2[j-1]:
                 dp[i][j] =   1+recur(i-1,j-1)
                 return dp[i][j]
             
             dp[i][j] =  max(recur(i-1,j),recur(i,j-1))
             return dp[i][j]
             
-        return recur(x-1,y-1)
+        return recur(x,y)
         # code here
 
 
