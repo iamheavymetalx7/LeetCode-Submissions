@@ -20,4 +20,20 @@ class Solution:
                 else:
                     dp[i][j]=max(dp[i-1][j],dp[i][j-1])
 
+        i=n
+        j=m
+        string=""
+        
+        while (i>0 and j>0):
+            if text1[i-1]==text2[j-1]:
+                string+=text1[i-1]
+                i-=1
+                j-=1
+            else:
+                if dp[i-1][j]>dp[i][j-1]:
+                    i-=1
+                else:
+                    j-=1
+        print(string[::-1])
+        
         return dp[n][m]
