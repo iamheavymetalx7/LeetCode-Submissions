@@ -11,8 +11,8 @@ class Solution:
             if i>0 and j==0:
                 return False
             if i==0 and j>0:
-                for jj in range(j):
-                    if t[jj]!="*":
+                for jj in range(1,j+1):
+                    if t[jj-1]!="*":
                         return False
                 return True
             if dp[i][j]!=-1:
