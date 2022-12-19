@@ -1,3 +1,4 @@
+## same solution works here also: https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
 """
 # Definition for a Node.
 class Node:
@@ -21,7 +22,7 @@ class Solution:
                 node=q.popleft()
                 
                 if t>1:
-                    node.next = q[0]
+                    node.next=q[0]
                 t-=1
                 
                 if node.left:
