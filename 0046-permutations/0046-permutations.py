@@ -1,21 +1,22 @@
 class Solution:
-    def recur(self,index,nums,ans):
-        if index==len(nums):
-            ans.append(nums.copy())
-            return
-        
-        for i in range(index,len(nums)):
-            nums[index],nums[i]=nums[i],nums[index]
-            self.recur(index+1,nums,ans)
-            nums[index],nums[i]=nums[i],nums[index]
-    
-    
+
     def permute(self, nums: List[int]) -> List[List[int]]:
         ans=[]
-        self.recur(0,nums,ans)
+        
+        def recur(index):
+            if index>=len(nums):
+                ans.append(nums.copy())
+                return
+            
+            for i in range(index,len(nums)):
+                nums[index],nums[i]=nums[i],nums[index]
+                
+                recur(index+1)
+                
+                nums[index],nums[i]=nums[i],nums[index]
+        recur(0)
         return ans
-        
-        
+            
         
         
         
