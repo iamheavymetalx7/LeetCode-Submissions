@@ -5,31 +5,37 @@ from typing import List
 sys.setrecursionlimit(10**8)
 class Solution:
     def dfs(self,grid,vis,i,j,direction):
+        global string
         n=len(grid)
         m=len(grid[0])
         
         if i<0 or i>=n or j<0 or j>=m:
-            return ""
+            return
+            
             
         if grid[i][j]==0 or vis[i][j]:
-            return ""
-        
+            return
+
         vis[i][j]=True
+
+        string+=direction
         
-        traversal=direction
+
+
         
-        traversal+=self.dfs(grid,vis,i+1,j,"D")
-        traversal+=self.dfs(grid,vis,i-1,j,"U")
-        traversal+=self.dfs(grid,vis,i,j+1,"R")
-        traversal+=self.dfs(grid,vis,i,j-1,"L")
+        self.dfs(grid,vis,i+1,j,"D")
+        self.dfs(grid,vis,i-1,j,"U")
+        self.dfs(grid,vis,i,j+1,"R")
+        self.dfs(grid,vis,i,j-1,"L")
         
-        traversal+="B"
-        
-        return traversal
+        string+="B"  ##back
+
+        return string
         
     
     def countDistinctIslands(self, grid : List[List[int]]) -> int:
         # code here
+        global string
         n = len(grid)
         m = len(grid[0])
         vis=[[False]*m for j in range(n)]
@@ -38,8 +44,9 @@ class Solution:
         for i in range(n):
             for j in range(m):
                 if grid[i][j]==1 and not vis[i][j]:
-                    path = self.dfs(grid,vis,i,j,"O")
-                    islandSet.add(path)
+                    string=""
+                    self.dfs(grid,vis,i,j,"O")
+                    islandSet.add(string)
         # print(islandSet)
         return len(islandSet)
 #{ 
