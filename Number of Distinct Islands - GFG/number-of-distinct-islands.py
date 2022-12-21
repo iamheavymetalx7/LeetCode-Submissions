@@ -28,8 +28,7 @@ class Solution:
         self.dfs(grid,vis,i,j+1,"R")
         self.dfs(grid,vis,i,j-1,"L")
         
-        string+="B"  ##back
-
+        string+="B"
         return string
         
     
