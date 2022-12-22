@@ -7,7 +7,7 @@ class Solution:
         for right in range(len(nums)):
             pdt*=nums[right]
             
-            while pdt>=k and left<len(nums):
+            while pdt>=k and left<right:
                 pdt/=nums[left]
                 left+=1
             
