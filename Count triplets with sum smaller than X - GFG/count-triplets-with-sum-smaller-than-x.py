@@ -13,11 +13,13 @@ class Solution:
             while left<right:
                 threesum = arr[i]+arr[left]+arr[right]
                 
-                if threesum<sumo:
+                if threesum<sumo:  # found the triplet
+      # since arr[right] >= arr[left], therefore, we can replace arr[right] by any 
+      # number between left and right to get a sum less than the target sum
                     cnt+=right-left
                     left+=1
                 else:
-                    right-=1
+                    right-=1    # we need a pair with a smaller sum
                 
         return cnt
 
