@@ -2,11 +2,12 @@ class Solution:
     def dfs(self,i,j,grid):
         n=len(grid)
         m=len(grid[0])
+        if i<0 or i>=n or j<0 or j>=m:
+            return False
         
         if grid[i][j]==1:
             return True
-        if i<=0 or i>=n-1 or j<=0 or j>=m-1:
-            return False
+
         ## like marking it as visited
         grid[i][j]=1
         
