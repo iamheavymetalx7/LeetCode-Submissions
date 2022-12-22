@@ -30,8 +30,8 @@ class Solution:
         
 #         0s denote the land while 1s denote the water
         
-        for i in range(1,n-1):
-            for j in range(1,m-1):
+        for i in range(n):
+            for j in range(m):
                 if grid[i][j]==0 and self.dfs(i,j,grid):
                     count+=1
         return count
