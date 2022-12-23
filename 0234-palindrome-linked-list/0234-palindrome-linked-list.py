@@ -5,7 +5,9 @@
 #         self.next = next
 class Solution:
     def reverse(self,head):
-
+        if (not head or not head.next):
+            return head
+        
         prev=None
         curr=head
         
