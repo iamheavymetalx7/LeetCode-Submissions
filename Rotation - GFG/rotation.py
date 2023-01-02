@@ -1,5 +1,9 @@
 #User function Template for python3
 class Solution:
+    
+    # In this problem, actually, we are asked to find the index of the 
+    # minimum element. The number of times the minimum element is 
+    # moved to the right will be equal to the number of rotations
     def findKRotation(self,nums,  n):
         # code here
         low=0
