@@ -34,7 +34,6 @@ class Solution:
                     if board[xx][yy]!="O" :
                         continue
                     q.append((xx,yy))
-                    board[xx][yy]='#'
         
         
         for i in range(n):
