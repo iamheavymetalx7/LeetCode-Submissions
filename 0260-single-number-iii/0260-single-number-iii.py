@@ -5,11 +5,13 @@ class Solution:
         for num in nums:
             n1xn2^=num
             
+        # print(n1xn2)
+            
         rightmost_bit=1
         
         while rightmost_bit & n1xn2 ==0:
             rightmost_bit = rightmost_bit<<1
-        
+        # print(rightmost_bit)
         num1,num2=0,0
         
         for num in nums:
