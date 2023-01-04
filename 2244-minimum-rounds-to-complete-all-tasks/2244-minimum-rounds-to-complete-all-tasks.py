@@ -11,17 +11,7 @@ class Solution:
             if dd[key]==1:
                 return (-1)
             else:
-                # 7 -> 2-2 3-1
-                # 11 -> 3-3 2-1
-                # 10 -> 3-2, 2-2
-                    
-                if dd[key]%3==0:
-                    min_ans+=dd[key]//3
-                else:
-                    while dd[key]>4:
-                        dd[key]-=3
-                        min_ans+=1
-                    min_ans+=dd[key]//2
+                min_ans += (dd[key]+2)//3
 
         return min_ans
     
