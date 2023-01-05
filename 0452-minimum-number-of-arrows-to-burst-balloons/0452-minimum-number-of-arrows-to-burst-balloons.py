@@ -1,5 +1,30 @@
 class Solution:
     def findMinArrowShots(self, points: List[List[int]]) -> int:
+        if len(points)==0:
+            return 0
+        
+        
+        points.sort(key=lambda p: p[1])
+    
+        
+        curr=points[0]
+        
+        arrow=1
+        
+        for balloon in points:
+            if curr[1]<balloon[0]:
+                curr= balloon
+                arrow+=1
+                
+        return(arrow)
+    
+    
+'''
+## My solution:
+
+
+class Solution:
+    def findMinArrowShots(self, points: List[List[int]]) -> int:
         
         points.sort()        
         n=len(points)
@@ -21,5 +46,8 @@ class Solution:
                         break   
                 cnt+=1
         return cnt
+
+'''
+    
                     
-                    
+                        
