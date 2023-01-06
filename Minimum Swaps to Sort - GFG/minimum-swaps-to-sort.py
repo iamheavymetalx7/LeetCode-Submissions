@@ -17,23 +17,20 @@ class Solution:
         
         vis=[0]*(n+1)
         
+        cycle=0
         for i in range(len(nums)):
             if vis[i] or arr[i][0]==i:
+                if arr[i][0]==i:
+                    cycle+=1
                 continue
-            
-            
+
             j=i
-            cycle_size=0
-            
             while not vis[j]:
                 vis[j]=1
                 j=arr[j][0]
-                cycle_size+=1
             
-            if cycle_size>0:
-                ans+=cycle_size-1
-                
-        return ans
+            cycle+=1
+        return n-cycle
         
 
 #{ 
