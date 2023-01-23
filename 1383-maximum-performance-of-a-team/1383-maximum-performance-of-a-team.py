@@ -11,7 +11,7 @@ class Solution:
         pq=[]
         total=0
         res=-1
-        for b,a in sorted(zip(eff,speed),reverse=True):
+        for b,a in sorted(zip(eff,speed),key=lambda x:-x[0]):
             heappush(pq,a)
             total+=a
             
