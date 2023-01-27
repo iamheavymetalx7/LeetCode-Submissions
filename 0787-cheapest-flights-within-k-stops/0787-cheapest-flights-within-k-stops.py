@@ -24,7 +24,7 @@ class Solution:
                 adjNode=j[0]
                 edWeight=j[1]
                 
-                if cost+edWeight < dist[adjNode] and stops<=k:
+                if cost+edWeight < dist[adjNode]:
                     dist[adjNode] = cost+edWeight
                     q.append([stops+1,adjNode,dist[adjNode]])
         if dist[dst]==pow(10,9):
