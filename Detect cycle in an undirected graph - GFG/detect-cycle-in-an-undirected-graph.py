@@ -3,37 +3,32 @@ from collections import deque
 class Solution:
     #Function to detect cycle in an undirected graph.
 	def isCycle(self, V: int, adj: List[List[int]]) -> bool:
-		#Code here
-
-        
-        def solve(src):
-            vis[src]=1
-            q.append([src,-1])
-        
-            while q:
-                node,par = q.popleft()
-                
-                for adjele in adj[node]:
-                    if not vis[adjele]:
-                        vis[adjele]=1
-                        q.append([adjele,node])
-                    else:
-                        if par!=adjele:
-                            return True
-                        
-            return False
-                        
-		
-        q=deque()
         vis=[0]*V
         
         
+        def dfs(node, par):
+            vis[node]=1
+            
+            for adjele in adj[node]:
+                if not vis[adjele]:
+                    if dfs(adjele,node):
+                        return True
+                else:
+                    if adjele!=par:
+                        return True
+                        
+            return False
+            
         for i in range(V):
             if not vis[i]:
-                if solve(i):
+                if dfs(i,-1):
                     return True
-        return False
                     
+        return False
+        
+        
+        
+        
 #{ 
  # Driver Code Starts
 if __name__ == '__main__':
