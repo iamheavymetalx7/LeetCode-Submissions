@@ -1,32 +1,29 @@
-from collections import deque
 class Solution:
 	def isBipartite(self, V, adj):
+		#code here
+		
+		color=[-1]*V
+		
+		def dfs(node,clr):
+            color[node]=clr
+            
+		    for ele in adj[node]:
+		        if color[ele]==-1:
+		            color[ele]=1-color[node]
+		            if dfs(ele,color[ele])==False:
+		                return False
+		        else:
+		            if color[ele]==color[node]:
+		                return False
+		    return True
 	    
-	    def isBip(start):
-	       
-	        color[start]=0
-	        q.append(start) 
-	        
-	        while q:
-	            node=q.popleft()
-    	            
-    	        for ele in adj[node]:
-    	            if color[ele]==-1:
-    	                color[ele] = 1-color[node]
-    	                q.append(ele)
-    	            else:
-    	                if color[ele]==color[node]:
-    	                    return False
-	        return True
-	        
-	        
-	    color=[-1]*V
-	    q=deque()
 	    for i in range(V):
 	        if color[i]==-1:
-	            if isBip(i)==False:
+	            if dfs(i,0)==False:
 	                return False
 	    return True
+	           
+
 
 #{ 
  # Driver Code Starts
