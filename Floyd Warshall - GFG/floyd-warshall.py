@@ -18,7 +18,10 @@ class Solution:
                 for j in range(n):
                     matrix[i][j] = min(matrix[i][j],matrix[i][k]+matrix[k][j])
 
-        
+        for i in range(n):
+            if matrix[i][i]<0:
+                return "contanins negative cycle"
+                
 
         for i in range(n):
             for j in range(n):
