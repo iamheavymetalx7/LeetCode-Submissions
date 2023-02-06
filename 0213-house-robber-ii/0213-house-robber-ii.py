@@ -1,45 +1,39 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
+        n=len(nums)
+        dp1=[-1]*(n-1)
+        dp2=[-1]*(n-1)
         
-        
-        temp1=[nums[i] for i in range(len(nums)-1)]
-        temp2 =[nums[i] for i in range(1,len(nums))]
+        nums1=nums[0:-1]
+        nums2=nums[1:]
         
         if len(nums)==1:
             return nums[0]
         
         
-        dp1=[-1]*(len(temp1))
-        
-        def recur(index,arr):
-            if index>=len(arr):
+        def recur1(index):
+            if index>=n-1:
                 return 0
             if dp1[index]!=-1:
                 return dp1[index]
             
-            take = recur(index+2,arr)+arr[index]
-            nottake = recur(index+1,arr)
-            
-            dp1[index] = max(take, nottake)
+            dp1[index] = max(recur1(index+2)+nums1[index],recur1(index+1))            
             
             return dp1[index]
-        
-        dp2=[-1]*len(temp2)
-        
-        def recur2(index,arr):
-            if index>=len(arr):
+            
+        def recur2(index):
+            if index>=n-1:
                 return 0
             if dp2[index]!=-1:
                 return dp2[index]
             
-            take = recur2(index+2,arr)+arr[index]
-            nottake = recur2(index+1,arr)
-            
-            dp2[index] = max(take, nottake)
+            dp2[index] = max(recur2(index+2)+nums2[index],recur2(index+1))            
             
             return dp2[index]
         
-        start=recur(0,temp1)
-        end=recur2(0,temp2)
+        ans1=recur1(0)
+        ans2=recur2(0)
         
-        return max(start,end)
+        return max(ans1,ans2)
+    
+        
