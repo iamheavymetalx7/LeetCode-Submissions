@@ -12,8 +12,8 @@ class Solution:
             if dp[index]!=int(1e8):
                 return dp[index]
             
-            for j in range(1,1+nums[index]):
-                dp[index] = min(1+recur(index+j),dp[index])
+            for newidx in range(index,index+nums[index]):
+                dp[index] = min(1+recur(newidx+1),dp[index])
 
             return dp[index]
         
