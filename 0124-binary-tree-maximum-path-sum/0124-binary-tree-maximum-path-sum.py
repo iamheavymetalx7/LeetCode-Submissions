@@ -4,29 +4,29 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
-import math
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        global MaxSum
-        MaxSum =-math.inf
         
-        def dfs(node):
-            global MaxSum
-            if not node:
+        res=[-10**9]
+        
+        def dfs(root):
+            if not root:
+                # print("return as not node")
                 return 0
-            
-            left = dfs(node.left)
-            right = dfs(node.right)
+            # print("go left..")
+            left=dfs(root.left)
+            # print("go right..")
+            right=dfs(root.right)
             
             left=max(left,0)
+            # print(left,"left...")
             right=max(right,0)
+            # print(right,"right...")
             
-            MaxSum = max(MaxSum,node.val+left+right)
+            
+            res[0]=max(res[0],left+right+root.val)
+            # print("return to prev node with val:", root.val+max(left,right))
+            return root.val+max(left, right)
         
-            return node.val + max(left,right)
-            
         dfs(root)
-        return MaxSum
-            
-        
+        return res[0]
