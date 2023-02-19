@@ -1,14 +1,20 @@
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        if not nums:
-            return 0
-        max_sum=nums[0]
-        cur_sum=nums[0]
         n=len(nums)
+        Sumarr=[0]*n
+        Sumarr[0]=nums[0]
         
         for i in range(1,n):
-            cur_sum=max(nums[i],nums[i]+cur_sum)
-            max_sum=max(max_sum,cur_sum)
+            Sumarr[i]=Sumarr[i-1]+nums[i]
         
-        return max_sum
+        minS=min(0,nums[0])
         
+        ans= nums[0]
+        
+        for i in range(1,n):
+            if Sumarr[i]-minS > ans:
+                ans=Sumarr[i]-minS
+            if Sumarr[i] < minS:
+                minS=Sumarr[i]
+        return ans
+    
