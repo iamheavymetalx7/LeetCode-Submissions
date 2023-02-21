@@ -17,14 +17,16 @@ class Solution:
         
     
     def minCapability(self, nums: List[int], k: int) -> int:
-        l=1
+        ## always choose the values which are impossible
+        ## here l=0 and r=max(nums)
+        l=0
         r=max(nums)        
-        while r>l:
+        while r>l+1:
             m=(l+r)//2
             print(l,r)
             if self.isPossible(m,nums,k):
                 r=m
             else:
-                l=m+1
-        return l
+                l=m
+        return r
         
