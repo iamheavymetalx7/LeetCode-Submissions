@@ -18,13 +18,9 @@ class Solution:
                 chars[j]=curr
                 j+=1
                 if cnt>1:
-                    m=len(str(cnt))
                     count_ = str(cnt)
-                    
-                    print(count_)
                     for c in count_:
                         chars[j] = c
-                    
                         j+=1
                 
                 curr = chars[i]
@@ -34,9 +30,7 @@ class Solution:
             chars[j]=curr
             j+=1
             if cnt>1:
-                m=len(str(cnt))
                 count_ = str(cnt)
-                print(count_)
                 for c in count_:
                     chars[j] = c
 
