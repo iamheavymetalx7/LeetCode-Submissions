@@ -6,21 +6,25 @@
 #         self.right = right
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
-        ans=[]
-        def helper(node,string):
-            if node.left is None and node.right is None:
-                string+=str(node.val)
-                ans.append(string)
-            
+        arr=[]
+        def dfs(node,s):
+            nonlocal arr
+
+            s+=str(node.val)
+            if (not node.left) and (not node.right):
+                arr+=[s]
+                
             if node.left:
-                helper(node.left,string+str(node.val))
-            
+                dfs(node.left,s)
+
             if node.right:
-                helper(node.right,string+str(node.val))
-        helper(root, "")
+                dfs(node.right,s)
+        dfs(root,"")
         
         summ=0
-        for i in range(len(ans)):
-            summ+=int(ans[i])
-        
+        for ele in arr:
+            summ+=int(ele)
+            
         return summ
+                
+        
