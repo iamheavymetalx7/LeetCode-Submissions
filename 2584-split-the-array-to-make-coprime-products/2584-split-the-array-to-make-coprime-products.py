@@ -1,5 +1,13 @@
 import math
 class Solution:
+    '''
+    other helpful links which uses sieve methods:
+    
+    1. https://leetcode.com/problems/split-the-array-to-make-coprime-products/discuss/3258526/Record-right-most-index-of-every-prime-factor-into-dictionary
+    
+    2. codingMohan explanation using sieve method on youtube
+    
+    '''
     
     def findValidSplit(self, nums: List[int]) -> int:
         N=len(nums)
