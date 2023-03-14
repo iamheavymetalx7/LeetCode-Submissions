@@ -5,19 +5,16 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def helper(self, l,r):
-        if ((not l) and (not r)):
-            return True
-        if ((not l) or (not r)):
+    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+        def dfs(l,r):
+            if not l and not r:
+                return True
+            
+            if l and r:
+                return l.val==r.val and dfs(l.left, r.right) and dfs(l.right,r.left)
+            
             return False
-
         
-        return ((l.val==r.val) and self.helper(l.left, r.right) and self.helper(l.right,r.left))
-    
-    
-    def isSymmetric(self, root: Optional[TreeNode]):
         if not root:
             return True
-        
-        return self.helper(root.left, root.right)
-        
+        return dfs(root.left, root.right)
