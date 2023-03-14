@@ -12,7 +12,7 @@ class Solution:
 
             s+=str(node.val)
             if (not node.left) and (not node.right):
-                arr+=[s]
+                arr.append(s)
                 
             if node.left:
                 dfs(node.left,s)
