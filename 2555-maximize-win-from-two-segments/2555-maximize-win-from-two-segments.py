@@ -8,16 +8,9 @@ class Solution:
         
         
     
-        mini = prizePositions[0]
-        maxi=prizePositions[-1]
+
         
         n=len(prizePositions)
-
-        if mini+2*k>=maxi:
-            return n
-
-        if k==0:
-            return 2
         
         left,dp,max_val=0,[0]*(n+1),0
         
@@ -26,9 +19,8 @@ class Solution:
                 left+=1
             
             dp[right+1]=max(dp[right],right-left+1)
-            
+            # print(right,left)
             max_val=max(max_val, dp[left]+right-left+1)
-        
         return max_val
         
         
