@@ -8,7 +8,7 @@ class Solution:
     
     def beautifulSubsets(self, nums: List[int], k: int) -> int:
         n=len(nums)
-        s=[]
+        s=set()
         res=0
         
         def recur(idx):
@@ -19,8 +19,8 @@ class Solution:
                 if nums[j]+k in s or nums[j]-k in s:
                     continue
                 res+=1
-                s.append(nums[j])
+                s.add(nums[j])
                 recur(j+1)
-                s.remove(nums[j])
+                s.discard(nums[j])
         recur(0)
         return res  
