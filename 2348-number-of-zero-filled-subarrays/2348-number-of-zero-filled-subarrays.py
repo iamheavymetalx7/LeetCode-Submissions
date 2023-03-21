@@ -1,18 +1,14 @@
 from collections import defaultdict
 class Solution:
     def zeroFilledSubarray(self, nums: List[int]) -> int:
-        dic=defaultdict(list)
+        c=0
+        res=0
         
-        dic[0].append(-1)
-        s=0
-        for i,j in enumerate(nums):
-            s+=abs(j)
-            dic[s].append(i)
-        ans=0
-        print(dic)
-        for k,v in dic.items():
-            if len(v)>1:
-                ans+=((len(v)-1)*(len(v)))//2
-        return ans
-            
+        for ele in nums:
+            if ele!=0:
+                c=0
+            else:
+                c+=1
+                res+=c
+        return res
         
