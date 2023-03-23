@@ -14,12 +14,13 @@ class Solution:
         components = 0
         
         def dfs(u):
-
+            if u in vis:
+                return
             vis.add(u)
+            
             for v in graph[u]:
-                if v not in vis:
-                    vis.add(v)
-                    dfs(v)
+                dfs(v)
+
 
         for i in range(n):
             if i not in vis:
