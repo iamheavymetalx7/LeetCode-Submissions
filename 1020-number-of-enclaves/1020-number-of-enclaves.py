@@ -3,7 +3,7 @@ class Solution:
         n=len(grid)
         m=len(grid[0])
         def dfs(i,j):
-            if i<=-1 or j<=-1 or i>=n or j>=m or grid[i][j]==0:
+            if i<0 or j<0 or i>=n or j>=m or grid[i][j]==0:
                 return 
             
             grid[i][j]=0
