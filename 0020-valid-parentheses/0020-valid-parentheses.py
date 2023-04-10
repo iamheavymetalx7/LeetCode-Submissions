@@ -1,20 +1,30 @@
-from collections import deque
 class Solution:
     def isValid(self, s: str) -> bool:
-        st=deque()
+        st=[]
         for i in range(len(s)):
-            if len(st)==0:
+            # print(st)
+            if s[i]=="(" or s[i]=="{" or s[i]=="[":
                 st.append(s[i])
-            else:
-                if st[-1]=="(" and s[i]==")":
-                    st.pop()
-                elif st[-1]=="{" and s[i]=="}":
-                    st.pop()
-                elif st[-1]=="[" and s[i]=="]":
-                    st.pop()
-                else:
-                    st.append(s[i])
-        if len(st)==0:
-            return True
-        return False
-        
+            if s[i]==")" and not st:
+                return False
+            if s[i]=="}" and not st:
+                return False
+            if s[i]=="]" and not st:
+                return False
+            if s[i]==")" and st[-1]=="(":
+                st.pop()
+                continue
+            if s[i]=="}" and st[-1]=="{":
+                st.pop()
+                continue
+            if s[i]=="]" and st[-1]=="[":
+                st.pop()
+                continue
+            if s[i]==")" and st[-1]!="(":
+                st.append(")")
+            if s[i]=="}" and st[-1]!="{":
+                st.append("}")
+            if s[i]=="]" and st[-1]!="[":
+                st.append("]")
+        return len(st)==0
+                
