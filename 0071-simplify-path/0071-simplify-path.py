@@ -2,11 +2,8 @@ class Solution:
     def simplifyPath(self, path: str) -> str:
         
         parts=path.split('/')
-        
-#         print(parts)
-        
+        # print(parts)
         st=[]
-        
         for p in parts:
             if p in ("","."):
                 continue
@@ -15,6 +12,5 @@ class Solution:
                     st.pop()
             else:
                 st.append(p)
-                
-        ans='/'+'/'.join(st)
-        return ans
+        
+        return '/'+'/'.join(st)
