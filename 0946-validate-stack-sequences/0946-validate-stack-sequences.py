@@ -1,3 +1,4 @@
+'''
 class Solution:
     def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
         st=[]
@@ -24,3 +25,17 @@ class Solution:
                 st.pop()
                 popped.pop(0)
         return True
+'''
+
+class Solution:
+    def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
+        st=[]
+        i=0
+        
+        for ele in pushed:
+            st.append(ele)
+            
+            while len(st)>0 and st[-1]==popped[i]:
+                i+=1
+                st.pop()
+        return True if len(st)==0 else False
