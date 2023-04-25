@@ -1,16 +1,24 @@
+def sumofsquare(a):
+    s = str(a)
+    ans = 0
+    for i in s:
+        ans += (int(i))**2
+    return ans
+
+
+
 class Solution:
-    def sqrd(self,n):
-        return sum([int(x)**2 for x in str(n)])
-    
-    def isHappy(self, num: int) -> bool:
-        slow=num
-        fast=num
+    def isHappy(self, n: int) -> bool:
+        numbers = set()
         
-        while True:
-            slow=self.sqrd(slow)
-            fast=self.sqrd(self.sqrd(fast))
-            
-            if fast==slow:
-                break
-                
-        return fast==1
+        while n not in numbers:
+            numbers.add(n)
+            a = sumofsquare(n)
+            #print(a)
+            if a ==1:
+                return True
+            #print(numbers)
+            n = a
+        return False
+        
+        
