@@ -1,16 +1,19 @@
 class Solution:
     def numSubseq(self, nums: List[int], target: int) -> int:
         nums.sort()
-        mod=10**9+7
-        res=0
-        pointer = len(nums)-1
         
-        for i,left in enumerate(nums):
-            while left+nums[pointer]>target and i<=pointer:
-                pointer-=1
-            if i<=pointer:
-                res+=pow(2,pointer-i,mod)
-        return res%mod
-                
+        mod = 10**9+7
+        
+        right=len(nums)-1
+        
+        ans=0
+        
+        for left in range(len(nums)):
+            while nums[left]+nums[right]>target and left<=right:
+                right-=1
+            if left<=right:
+                ans+=pow(2,right-left, mod)
+        
+        return ans%mod
                 
         
