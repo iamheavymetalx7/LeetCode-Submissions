@@ -2,19 +2,11 @@ class Solution:
     def mostPoints(self, questions: List[List[int]]) -> int:
         n=len(questions)
         
+        dp=[0]*(n+1)
         
-        
-        @cache
-        def recur(i):
-            if i>=n:
-                return 0
+        for i in range(n-1,-1,-1):
             points,jump = questions[i]
             
-            
-            take = points+recur(i+jump+1)
-            nottake = recur(i+1)
-            
-            return max(take,nottake)
+            dp[i]=max(points+dp[min(i+jump+1,n)] , dp[i+1])
         
-        return recur(0)
-            
+        return dp[0]
