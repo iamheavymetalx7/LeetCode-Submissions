@@ -17,9 +17,10 @@ class Solution:
         
         
         def bfs(src,dst):
-            q,seen = [(src,1.0)],set()
+            q,seen = deque([(src,1.0)]),set()
             
-            for x,v in q:
+            while q:
+                x,v=q.popleft()
                 if x==dst:
                     return v
                 seen.add(x)
