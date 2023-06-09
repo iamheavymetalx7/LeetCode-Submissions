@@ -1,18 +1,20 @@
 class Solution:
     def maxScore(self, nums1: List[int], nums2: List[int], k: int) -> int:
-        
-        pq = []
-        total = 0
-        maxres=0
-        for a,b in sorted(zip(nums1,nums2),key=lambda x:-x[1]):
-            heappush(pq,a)
-            total+=a
+        arr=zip(nums2,nums1)
+        a=list(arr)
+        a.sort(reverse=True)
+        print(a)
+        pq=[]
+        tot=0
+        ans=-1
+        for x,y in a:
+            heappush(pq,y)
+            tot+=y
             
             if len(pq)>k:
-                total-=heappop(pq)
-            
+                tot-=heappop(pq)
+            # print(tot,"toto")
             if len(pq)==k:
-                maxres=max(maxres,total*b)
-        return maxres
-        
-        
+                ans=max(ans, tot*x)
+        return ans
+            
