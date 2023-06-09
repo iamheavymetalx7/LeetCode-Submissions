@@ -1,24 +1,33 @@
 class Solution:
-    def BinarySearch(self,letters,target):
-        low=0
-        high=len(letters)-1
-
-        while low<=high:
-
-            mid = (low+high)//2
-
-            if target<letters[mid]:
-                high=mid-1
-            else:
-                low=mid+1
-                
-        return low%len(letters)
-                
-        
     def nextGreatestLetter(self, letters: List[str], target: str) -> str:
-        target=ord(target)
         
-        letters=[ord(letter) for letter in letters]
-        print(letters,target)
-        ans = self.BinarySearch(letters,target)
-        return chr(letters[ans])
+
+                
+        
+        n=len(letters)
+        
+        arr = [ord(x) for x in letters]
+        tgt = ord(target)
+        
+        # print(arr)
+        # print(tgt)
+
+        l,r=0,n-1
+            
+        while l<=r:
+            m=(l+r)//2
+            
+            # print(l,r,m)
+                        
+            if tgt<arr[m]:
+                r=m-1
+            else:
+                l=m+1
+                
+                
+        ans = (l)%n
+        print(ans)
+        
+        return chr(arr[ans])
+        
+        
