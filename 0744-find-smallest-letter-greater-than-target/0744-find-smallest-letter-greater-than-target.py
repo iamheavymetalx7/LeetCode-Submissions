@@ -12,20 +12,18 @@ class Solution:
         # print(arr)
         # print(tgt)
 
-        l,r=0,n-1
+        l,r=-1,n
             
-        while l<=r:
+        while r>l+1:
             m=(l+r)//2
             
-            # print(l,r,m)
-                        
-            if tgt<arr[m]:
-                r=m-1
+            if arr[m]>tgt:
+                r=m
             else:
-                l=m+1
+                l=m
                 
                 
-        ans = (l)%n
+        ans = (r)%n
         print(ans)
         
         return chr(arr[ans])
