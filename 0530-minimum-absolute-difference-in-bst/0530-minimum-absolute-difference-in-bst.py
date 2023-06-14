@@ -6,29 +6,29 @@
 #         self.right = right
 class Solution:
     def getMinimumDifference(self, root: Optional[TreeNode]) -> int:# Definition for a binary tree node.
-
         
         q=deque()
         q.append(root)
         arr=[]
         
+        
         while q:
-            front = q.popleft()
+            node = q.popleft()
             
-            arr.append(front.val)
+            arr.append(node.val)
             
-            if front.left:
-                q.append(front.left)
-            if front.right:
-                q.append(front.right)
+            if node.left:
+                q.append(node.left)
+            
+            if node.right:
+                q.append(node.right)
         
         arr.sort()
-        mini=10**9
         n=len(arr)
-        
+        mini=int(1e19)
         for i in range(1,n):
-            mini=min(mini, arr[i]-arr[i-1])
-            
+            mini=min(mini,arr[i]-arr[i-1])
+        
         return mini
             
             
