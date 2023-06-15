@@ -28,7 +28,7 @@ class Solution:
         ans=0
         
         for i in range(1,len(nums)+1):
-            for x in range(0,(i+1)//2+1):
+            for x in range(0,(i)//2+1):
                 
                 fir=x
                 sec=i-x
