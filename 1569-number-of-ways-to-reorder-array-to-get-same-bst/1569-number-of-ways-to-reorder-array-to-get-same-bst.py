@@ -11,7 +11,7 @@ class Solution:
             less = [v for v in nums if v<nums[0]]
             more = [v for v in nums if v>nums[0]]
             
-            return comb(len(less)+len(more), len(less))*calc(less)*calc(more)
+            return comb(len(less)+len(more), len(more))*calc(less)*calc(more)
         
         ans = calc(nums)
         return (ans-1)%(10**9+7)
