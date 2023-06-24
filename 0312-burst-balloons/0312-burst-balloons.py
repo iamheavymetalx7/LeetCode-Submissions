@@ -3,7 +3,7 @@
 
 # https://leetcode.com/problems/burst-balloons/discuss/892552/For-those-who-are-not-able-to-understand-any-solution-WITH-DIAGRAM
 
-
+# some easier solutions to try and dp python: https://leetcode.com/problems/burst-balloons/discuss/970727/Python-5-lines-dp-explained
 class Solution:
     def maxCoins(self, nums: List[int]) -> int:
         
