@@ -1,30 +1,32 @@
-import bisect
 class Solution:
     def avoidFlood(self, rains: List[int]) -> List[int]:
-        filled={}
-        dryDay=[]
         n=len(rains)
-        ans=[1]*n
+        ans =[1 for _ in range(n)]
+        filled=defaultdict(int)
+        dryday=[]
         
-        
-        for day,lake in enumerate(rains):
-            if not lake:
-                dryDay.append(day)
+            
+        for d,l in enumerate(rains):
+            if not l:
+                dryday.append(d)
                 continue
             
-            ans[day]=-1
+            ans[d]=-1
             
-            if lake in filled:
-                if len(dryDay)==0:
+            if l in filled:
+                if not dryday:
                     return []
-                dryDay_index = bisect.bisect_left(dryDay,filled[lake])
-                if dryDay_index>=len(dryDay):
+                idx = bisect.bisect_left(dryday,filled[l])
+                if idx>=len(dryday):
                     return []
-                dryonDay = dryDay.pop(dryDay_index)
-                ans[dryonDay]=lake
-            filled[lake]=day
-            
+                dryonDay = dryday.pop(idx)
+                ans[dryonDay]=l
+            filled[l] = d
         return ans
+            
                 
                 
-                
+            
+                        
+            
+            
