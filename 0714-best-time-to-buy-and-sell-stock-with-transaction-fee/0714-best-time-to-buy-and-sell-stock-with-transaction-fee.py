@@ -1,21 +1,29 @@
 class Solution:
     def maxProfit(self, prices: List[int], fee: int) -> int:
         n=len(prices)
-        dp=[[-1]*2 for j in range(n+1)]
+        dp=[[-1]*2 for _ in range(n+1)]
         
-        
-        def recur(index, buy):
-            
-            if index>=n:
+        def recur(idx,buy):
+            if idx>=n:
                 return 0
             
-            if dp[index][buy]!=-1:
-                return dp[index][buy]
+            if dp[idx][buy]!=-1:
+                return dp[idx][buy]
+                
             
             if buy:
-                dp[index][buy]= max(-prices[index]+recur(index+1,0),0+recur(index+1,1))
-                return dp[index][buy]
+                take = recur(idx+1,0)-prices[idx]
+                nottake = recur(idx+1,1)
+                
+                dp[idx][buy] = max(take,nottake)
+                return dp[idx][buy]
             else:
-                dp[index][buy]=max(prices[index]-fee+recur(index+1,1),0+recur(index+1,0))
-                return dp[index][buy]
+                take = recur(idx+1, 1)+prices[idx]-fee
+                nottake = recur(idx+1,0)
+                dp[idx][buy]= max(take,nottake)
+                
+                return dp[idx][buy]
+            
         return recur(0,1)
+                
+        
