@@ -1,39 +1,40 @@
+## choosing the correct left boundary in this case is important!!
+## moreove the boolean condition should be set to s<=k and not s==k
 class Solution:
-    
-    def isPossible(self,mid,k,nums):
-        total=0
-        count=0
-        
-        for i in range(len(nums)):
-            if nums[i]>mid:
-                return False
-            if total+nums[i]>mid:
-                count+=1
-                total=nums[i]
-            else:
-                total+=nums[i]
-        
-        if count<k:
-            return True
-        
-        return False
-        
-        
     def splitArray(self, nums: List[int], k: int) -> int:
-        low=min(nums)
-        high=sum(nums)
         
-        if k>len(nums):
-            return -1
         
-        while low<=high:
-            mid=(low+high)//2
+        if k==1:
+            return sum(nums)
+        
+        
+        def check(x,k):
+            s=1
+            tot=0
+            n=len(nums)
+            for i in range(n):
+                if tot+nums[i]>x:
+                    tot=nums[i]
+                    s+=1
+                else:
+                    tot+=nums[i]
+            if s<=k:
+                return True
             
-            if self.isPossible(mid,k,nums):
-                ans=mid
-                high=mid-1
+            return False
+        
+        l=max(nums)-1
+        r=sum(nums)+1
+        
+        
+        
+        
+        while r>l+1:
+            m=(l+r)//2
+            
+            if check(m,k):
+                r=m
             else:
-                low=mid+1
-        return ans
-    
-    
+                l=m
+
+        return r
