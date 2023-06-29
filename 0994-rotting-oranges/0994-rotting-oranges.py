@@ -1,43 +1,47 @@
-from collections import deque
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        dire=[(1,0),(0,1),(-1,0),(0,-1)]
-        rotten=deque()
+        fresh_cnt= 0
+        rotten = deque()
         
+        n=len(grid)
+        m=len(grid[0])
+        vis=set()
         
-
-        total=0
+        for i in range(n):
+            for j in range(m):
+                if grid[i][j]==2:
+                    rotten.append((i,j))
+                    vis.add((i,j))
+                if grid[i][j]==1:
+                    fresh_cnt+=1
         
+        # print(rotten,"prifingal")
         
-        rot=0
+        dire =[(1,0),(0,1),(-1,0),(0,-1)]
         time=0
         
-        
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if grid[i][j]==2:
-                    rotten.append([i,j])
-                if grid[i][j]:
-                    total+=1
-        
         while rotten:
-            t=len(rotten)
-            rot+=t
-            
-            for j in range(t):
+            l=len(rotten)
+            # print(rotten,l)
+            for _ in range(l):
                 x,y = rotten.popleft()
                 
-                for x_,y_ in (dire):
-                    if 0<=x+x_<len(grid) and 0<=y+y_<len(grid[0]) and grid[x+x_][y+y_]==1:
-                        grid[x+x_][y+y_]=2
-                        rotten.append([x+x_,y+y_])
+                for dx,dy in dire:
+                    dx+=x
+                    dy+=y
+                    
+                    # print(dx,dy,"inside for")
+                    
+                    
+                    
+                    if (dx,dy) not in vis: 
+                        if 0<=dx<n and 0<=dy<m and grid[dx][dy]==1:
+                            fresh_cnt-=1
+                            vis.add((dx,dy))
+                            rotten.append((dx,dy))
             if rotten:
                 time+=1
-            
-        if rot==total:
+
+        if fresh_cnt==0:
             return time
         return -1
-
-        
-        
-        
