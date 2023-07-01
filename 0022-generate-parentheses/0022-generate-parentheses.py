@@ -1,19 +1,19 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        ans=[]
         
-        def helper(string,opencnt, closecnt):
-            if opencnt==n and closecnt==n:
-                ans.append(string)
-                
-            else:
-                if opencnt<n:
-                    helper(string+"(", opencnt+1, closecnt)
-                if closecnt<opencnt:
-                    helper(string+")", opencnt, closecnt+1)
-        helper("",0,0)
-        return ans
+        def dfs(l,r,s):
+            if len(s)==n*2:
+                res.append(s)
+                return
+        
+            if l<n:
+                dfs(l+1,r,s+"(")
             
-            
-            
-            
+            if r<l:
+                dfs(l,r+1,s+")")
+        
+        res =[]
+        
+        dfs(0,0,"")
+        return res
+        
