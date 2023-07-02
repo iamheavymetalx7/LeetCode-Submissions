@@ -29,15 +29,17 @@ class Solution:
         t=0
         q.append((start,t))
         
-        vis.add(start)
         
         maxi =0
         while q:
             ele,t = q.popleft()
+            if ele in vis:
+                continue
+            else:
+                vis.add(ele)
             maxi=max(maxi,t)
             for nei in graph[ele]:
                 if nei not in vis:
-                    vis.add(nei)
                     q.append((nei,t+1))
         
         return maxi
