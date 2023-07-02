@@ -39,8 +39,7 @@ class Solution:
                 vis.add(ele)
             maxi=max(maxi,t)
             for nei in graph[ele]:
-                if nei not in vis:
-                    q.append((nei,t+1))
+                q.append((nei,t+1))
         
         return maxi
         
