@@ -3,23 +3,21 @@ class Solution:
         graph = defaultdict(list)
         
         for x,y in paths:
-            graph[x-1].append(y-1)
-            graph[y-1].append(x-1)
+            x-=1
+            y-=1
+            graph[x].append(y)
+            graph[y].append(x)
         
-                
         
-            
-        res = [0]*(n)
+        res =[0]*(n)
         
         for i in range(n):
-            col = [1,2,3,4]
+            col =[1,2,3,4]
             
-            for ele in graph[i]:
-                if res[ele] in col:
-                    col.remove(res[ele])
-            res[i] = col.pop()
-        
+            for nei in graph[i]:
+                if res[nei] in col:
+                    col.remove(res[nei])
+            res[i]=col.pop()
         return res
-            
-        
+                
         
