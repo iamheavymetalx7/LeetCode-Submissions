@@ -17,8 +17,7 @@ class Solution:
             x,y,ob,cnt=q.popleft()
             
             if x==n-1 and y==m-1:
-                ans=min(ans,cnt)
-            
+                return cnt
             if (x,y,ob) in seen:
                 continue
             else:
