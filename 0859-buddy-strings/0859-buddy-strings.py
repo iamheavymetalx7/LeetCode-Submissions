@@ -1,31 +1,33 @@
 class Solution:
     def buddyStrings(self, s: str, goal: str) -> bool:
         n=len(s)
-        diff1=-1
-        diff2=-1
-            
+        cnt=0
+                    
         if len(s)!=len(goal):
             return False
+           
+        
+
+        arr=[]
         
         seen=set()
         
         for i in range(n):
             if s[i]!=goal[i]:
-                if diff1==-1:
-                    diff1=i
-                elif diff2==-1:
-                    diff2=i
-                else:
-                    return False
+                arr.append(i)
+                cnt+=1
             seen.add(s[i])
+            
+        print(cnt)
+        if cnt>2:return False
         
-        if diff1!=-1 and diff2!=-1:
-            return s[diff1]==goal[diff2] and goal[diff1]==s[diff2]
+        if cnt==2:
+            return s[arr[0]]==goal[arr[1]] and goal[arr[0]]==s[arr[1]]
         
-        if diff1!=-1:
+        if cnt==1:
             return False
         
-        return len(seen)<len(s)
-    
         
-            
+        
+        return len(seen)<len(s)
+        
