@@ -1,24 +1,25 @@
 class Solution:
-    def dfs(self,i,j,oclr,nclr,image):
-        n=len(image)
-        m=len(image[0])
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        q = deque([(sr,sc)])
+        n,m=len(image),len(image[0])
         
+        curr = image[sr][sc]
         dire =[(1,0),(0,1),(-1,0),(0,-1)]
         
-        image[i][j]=nclr
-        
-        
-        for x,y in dire:
-            if 0<=i+x<n and 0<=j+y<m and image[i+x][j+y]==oclr:
-                self.dfs(i+x,j+y,oclr,nclr,image)
-        
-    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
-        n=len(image)
-        m=len(image[0])
-        clr = image[sr][sc]
-        
-        if clr!=color:
-            self.dfs(sr,sc,clr,color,image)
-
+        image[sr][sc]=color
+        seen=set()
+        while q:
+            x,y = q.popleft()
+            
+            if (x,y) in seen:
+                continue
+            else:
+                seen.add((x,y))
+            for dx,dy in dire:
+                dx+=x
+                dy+=y
+                
+                if 0<=dx<n and 0<=dy<m and image[dx][dy]==curr:
+                    image[dx][dy]=color
+                    q.append((dx,dy))
         return image
-        
