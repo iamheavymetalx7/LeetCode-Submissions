@@ -1,3 +1,9 @@
+'''
+reference:
+1. https://leetcode.com/problems/single-number-ii/discuss/43313/A-general-C%2B%2B-solution-for-these-type-problems
+2. https://leetcode.com/problems/single-number-ii/discuss/327103/python-Binary-solution
+
+'''
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
         
