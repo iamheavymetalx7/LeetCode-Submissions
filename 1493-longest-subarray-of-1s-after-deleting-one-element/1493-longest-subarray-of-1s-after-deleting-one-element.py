@@ -1,29 +1,21 @@
 class Solution:
     def longestSubarray(self, nums: List[int]) -> int:
+        if sum(nums)==len(nums):
+            return len(nums)-1
+        
         n=len(nums)
         
-        if nums==[1]*n:
-            return n-1
+        zero,l,r,ans=0,0,0,0
         
-        dp=[[0]*2 for _ in range(n)]
-        
-        dp[0][0] = nums[0]
-        
-        for idx in range(1,n):
-            if nums[idx]==1:
-                dp[idx][0] = 1+dp[idx-1][0]
-                dp[idx][1] = 1+dp[idx-1][1]
+        for r in range(n):
+            if nums[r]==0:
+                zero+=1
             
-            else:
-                dp[idx][0]=0
-                dp[idx][1] = dp[idx-1][0]
-        
-        ans=0
-        for x in range(n):
-            for y in range(2):
-                ans=max(ans, dp[x][y])
-        
+            while zero>1:
+                if nums[l]==0:
+                    zero-=1
+                l+=1
+            
+            ans=max(ans, r-l+1-zero)
         return ans
-            
-                
         
