@@ -1,24 +1,20 @@
 class Solution:
     def maxCoins(self, nums: List[int]) -> int:
-        dp=[[-1]*305 for _ in range(305)]
         
-        nums =[1]+nums+[1]
+        nums=[1]+nums+[1]
         
-        
-        def dfs(l,r):
-            if l>r:
+        n=len(nums)
+    
+        @cache
+        def dp(i,j):
+            if i>j:
                 return 0
+            ans=0
+            for k in range(i,j+1):
+                coins=nums[i-1]*nums[k]*nums[j+1]
+                coins+=dp(i,k-1)+dp(k+1,j)
             
-            if dp[l][r]!=-1:
-                return dp[l][r]
-            
-            dp[l][r]=0
-            for i in range(l,r+1):
-                coins = nums[l-1]*nums[i]*nums[r+1]
-                coins+=dfs(l,i-1)+dfs(i+1,r)
-                
-                dp[l][r]=max(dp[l][r],coins)
-            return dp[l][r]
+                ans=max(ans,coins)
+            return ans
         
-        
-        return dfs(1,len(nums)-2)
+        return dp(1,n-2)
