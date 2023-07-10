@@ -3,22 +3,16 @@ class Solution:
         i=0
         a=[]
         n=len(s)
-        dic=defaultdict(int)
-        for i in range(n):
-            dic[s[i]]=i
-        
-            
-        prev=-1
-        maxi=0
-            
-        
-        for i in range(n):
+        while i<n:
+            idx =  s.rfind(s[i])
+            j=i
+            while j<idx:
+                idx=max(idx,s.rfind(s[j]))
+                j+=1
 
-            maxi= max(maxi, dic[s[i]])
+            a.append(idx-i+1)
 
-            if i==maxi:
-                a.append(maxi-prev)
-                prev=maxi
+            i=idx+1
         return a
-            
+
                 
