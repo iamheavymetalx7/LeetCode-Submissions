@@ -6,29 +6,44 @@ class Solution:
     def knapSack(self, N, W, val, wt):
         # code here
         
-        dp=[[-1]*(W+1) for _ in range(N)]
+        dp=[[0]*(W+1) for _ in range(N)]
         
-        def f(idx,W):
-            if idx==0:
-                if wt[idx]<=W:
-                    return val[0]*(W//wt[idx])
-                else:
-                    return 0
+        for i in range(0,W+1):
+            dp[0][i] = val[0]*(i//wt[0])
+        
+        for idx in range(1,N):
+            for w in range(W+1):
+                take =0
+                
+                nottake = dp[idx-1][w]
+                if wt[idx]<=w:
+                    take = val[idx]+dp[idx][w-wt[idx]]
+                
+                dp[idx][w] = max(take, nottake)
+        
+        return dp[-1][-1]
+        
+        # def f(idx,W):
+        #     if idx==0:
+        #         if wt[idx]<=W:
+        #             return val[0]*(W//wt[idx])
+        #         else:
+        #             return 0
             
-            if dp[idx][W]!=-1:
-                return dp[idx][W]
+        #     if dp[idx][W]!=-1:
+        #         return dp[idx][W]
             
-            take  =0
+        #     take  =0
             
-            nottake = f(idx-1,W)
-            if wt[idx]<=W:
-                take = val[idx]+f(idx,W-wt[idx])
+        #     nottake = f(idx-1,W)
+        #     if wt[idx]<=W:
+        #         take = val[idx]+f(idx,W-wt[idx])
             
-            dp[idx][W] = max(take, nottake)
+        #     dp[idx][W] = max(take, nottake)
 
-            return dp[idx][W]
+        #     return dp[idx][W]
         
-        return f(N-1,W)
+        # return f(N-1,W)
 #{ 
  # Driver Code Starts
 #Initial Template for Python 3
