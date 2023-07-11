@@ -1,42 +1,24 @@
-'''
-#Memoization code:
 class Solution:
-
     def change(self, amount: int, coins: List[int]) -> int:
-        dp=[[-1 for i in range(amount+1)] for j in range(len(coins))]
         
-        def recur(index,amount):
-            if index==0:
-                if amount%coins[0]==0:
+        n=len(coins)
+        dp=[[-1]*(amount+1) for _ in range(n)]
+        
+        
+        def f(idx,amt):
+            if idx==0:
+                if amt%coins[idx]==0:
                     return 1
-                return 0
-            if dp[index][amount]!=-1:
-                return dp[index][amount]
-            nottake = recur(index-1,amount)
+                else:
+                    return 0
+            if dp[idx][amt]!=-1:
+                return dp[idx][amt]
+            
+            nottake = f(idx-1,amt)
             take = 0
-            if coins[index]<=amount:
-                take = recur(index,amount-coins[index])
+            if coins[idx]<=amt:
+                take = f(idx,amt-coins[idx])
             
-            dp[index][amount]=take+nottake
-            
-            return dp[index][amount]
-        return recur(len(coins)-1,amount)
-'''
-## Tabulation code
-class Solution:   
-    def change(self, amount: int, coins: List[int]) -> int:
-        dp=[[0 for i in range(amount+1)] for j in range(len(coins))]
-        
-        
-        for T in range(amount+1):
-            dp[0][T] = int(T%coins[0]==0)
-        
-        for index in range(1,len(coins)):
-            for T in range(amount+1):
-                nottake = dp[index-1][T]
-                take = 0
-                if coins[index]<=T:
-                    take = dp[index][T-coins[index]]
-
-                dp[index][T]=take+nottake
-        return dp[len(coins)-1][amount] 
+            dp[idx][amt]=take+nottake
+            return dp[idx][amt]
+        return f(n-1,amount)
