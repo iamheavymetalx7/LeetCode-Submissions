@@ -1,23 +1,36 @@
-import math
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        dp=[[-1 for i in range(amount+1)] for j in range(len(coins))]
+        
+        n=len(coins)
+        coins.sort()
+        maxi =10**9
+        dp=[[-1]*(amount+1) for _ in range(n)]
         
         
-        def recur(index,amount):
+        def f(index,amount):
+            
             if index==0:
                 if amount % coins[index]==0:
-                    return amount//coins[index]
+                    return amount//coins[0]
                 else:
-                    return math.inf
+                    return 10**9
+            
             if dp[index][amount]!=-1:
                 return dp[index][amount]
-            nottake = recur(index-1,amount)
-            take=math.inf
-            if coins[index]<=amount:
-                take=1+recur(index,amount-coins[index])
             
-            dp[index][amount]  = min(take,nottake)
+            notpick = f(index-1,amount)
+            pick=10**9
+            
+            if coins[index]<=amount:
+                pick = 1+f(index, amount-coins[index])
+            
+            dp[index][amount]=min(pick,notpick)
+        
             return dp[index][amount]
-        ans =  recur(len(coins)-1,amount)
-        return ans if ans!=math.inf else -1
+        ans = f(n-1,amount)
+        
+        if ans<maxi:
+            return ans
+        return -1
+            
+            
