@@ -28,28 +28,67 @@ class Solution:
 '''
 
 
-class Solution:
+# class Solution:
     
-    def recursion(self,dp,arr,index,sum1,sum2):
-        if index>=len(arr):
-            return abs(sum1-sum2)
+#     def recursion(self,dp,arr,index,sum1,sum2):
+#         if index>=len(arr):
+#             return abs(sum1-sum2)
         
-        if dp[index][sum1]==-1:
-            diff1 = self.recursion(dp,arr,index+1,sum1+arr[index],sum2)
+#         if dp[index][sum1]==-1:
+#             diff1 = self.recursion(dp,arr,index+1,sum1+arr[index],sum2)
             
-            diff2 = self.recursion(dp,arr,index+1,sum1,sum2+arr[index])
+#             diff2 = self.recursion(dp,arr,index+1,sum1,sum2+arr[index])
             
-            dp[index][sum1]=min(diff1,diff2)
+#             dp[index][sum1]=min(diff1,diff2)
         
-        return dp[index][sum1]
+#         return dp[index][sum1]
     
     
-	def minDifference(self, arr, n):
+# 	def minDifference(self, arr, n):
 		# code here
-		s=sum(arr)
-		dp=[[-1 for i in range(s+1)] for j in range(n)]
+# 		s=sum(arr)
+# 		dp=[[-1 for i in range(s+1)] for j in range(n)]
 		
-		return self.recursion(dp,arr,0,0,0)
+# 		return self.recursion(dp,arr,0,0,0)
+
+class Solution:
+    def minDifference(self,a,n):
+        
+        k=sum(a)
+        n=len(a)
+        dp=[[0]*(k+1) for _ in range(n)]
+        
+        for i in range(n):
+            dp[i][0]=True
+
+        if a[0]<=k:
+            dp[0][a[0]]=True
+            
+        for i in range(1,n):
+            for target in range(1,k+1):
+                nottake = dp[i-1][target]
+                
+                take=False
+                
+                if a[i]<=target:
+                    take = dp[i-1][target-a[i]]
+                
+                dp[i][target] = take or nottake
+                
+                
+        mini=10**9
+        
+        # # print(dp)
+        # idx=-1
+        
+        # print(dp[-1])
+        
+        
+        for s1 in range(k//2 + 1):
+            if dp[n-1][s1]:
+                mini=min(mini, abs(k-s1-s1))
+        # print(i)
+        return mini
 
 
 
