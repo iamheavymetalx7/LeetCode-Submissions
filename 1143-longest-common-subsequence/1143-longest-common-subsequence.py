@@ -5,20 +5,8 @@ class Solution:
         
         dp=[[-1]*m for _ in range(n)]
         def f(i1,i2):
-            if i1==0 or i2==0:
-                if i1==0:
-                    for jj in range(i2,-1,-1):
-                        if text1[0]==text2[jj]:
-                            return 1
-                    else:
-                        return 0
-                
-                if i2==0:
-                    for jj in range(i1,-1,-1):
-                        if text1[jj]==text2[0]:
-                            return 1
-                    else:
-                        return 0
+            if i1<0 or i2<0:
+                return 0
             # print(i1,i2)
                             
             
