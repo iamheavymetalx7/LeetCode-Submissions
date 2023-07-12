@@ -1,39 +1,41 @@
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
-        n=len(text1)
-        m=len(text2)
         
+        n,m=len(text1),len(text2)
         
-        dp=[[-1]*(m+1) for j in range(n+1)]
-        
-        for j in range(m+1):
-            dp[0][j]=0
-        
-        for i in range(n+1):
-            dp[i][0]=0
+        dp=[[-1]*m for _ in range(n)]
+        def f(i1,i2):
+            if i1==0 or i2==0:
+                if i1==0:
+                    for jj in range(i2,-1,-1):
+                        if text1[0]==text2[jj]:
+                            return 1
+                    else:
+                        return 0
+                
+                if i2==0:
+                    for jj in range(i1,-1,-1):
+                        if text1[jj]==text2[0]:
+                            return 1
+                    else:
+                        return 0
+            # print(i1,i2)
+                            
             
-        for i in range(1,n+1):
-            for j in range(1,m+1):
+            if dp[i1][i2]!=-1:
+                return dp[i1][i2]
             
-                if text1[i-1]==text2[j-1]:
-                    dp[i][j]=1+dp[i-1][j-1]
-                else:
-                    dp[i][j]=max(dp[i-1][j],dp[i][j-1])
-
-        i=n
-        j=m
-        string=""
-        
-        while (i>0 and j>0):
-            if text1[i-1]==text2[j-1]:
-                string+=text1[i-1]
-                i-=1
-                j-=1
+            if text1[i1]==text2[i2]:
+                dp[i1][i2]=1+f(i1-1,i2-1)
             else:
-                if dp[i-1][j]>dp[i][j-1]:
-                    i-=1
-                else:
-                    j-=1
-        print(string[::-1])
+
+                one = f(i1-1,i2)
+                two = f(i1,i2-1)
+                dp[i1][i2] =max(one, two)
+            
+            return dp[i1][i2]
+
+        return f(n-1,m-1)
         
-        return dp[n][m]
+        
+            
