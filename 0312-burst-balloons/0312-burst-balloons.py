@@ -1,20 +1,21 @@
 class Solution:
     def maxCoins(self, nums: List[int]) -> int:
-        
-        nums=[1]+nums+[1]
-        
         n=len(nums)
-    
-        @cache
-        def dp(i,j):
+
+        nums =[1]+nums+[1]
+        
+        dp=[[-1]*(n+2) for _ in range(n+2)]
+        
+        def recur(i,j):
             if i>j:
                 return 0
-            ans=0
+            if dp[i][j]!=-1:
+                return dp[i][j]
+            res= 0
             for k in range(i,j+1):
-                coins=nums[i-1]*nums[k]*nums[j+1]
-                coins+=dp(i,k-1)+dp(k+1,j)
+                ans = nums[i-1]*nums[k]*nums[j+1]+recur(i,k-1)+recur(k+1,j)
+                res=max(ans,res)
+            dp[i][j]=res
             
-                ans=max(ans,coins)
-            return ans
-        
-        return dp(1,n-2)
+            return dp[i][j]
+        return recur(1,n)
