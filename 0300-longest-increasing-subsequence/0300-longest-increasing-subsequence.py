@@ -2,18 +2,33 @@ class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         n=len(nums)
         
-        dp=[[0]*(n+1) for _ in range(n+1)]
+        dp =[1]*(n)
+        for idx in range(n):
+            for prev in range(idx):
+                if nums[prev]<nums[idx]:
+                    dp[idx]=max(1+dp[prev],dp[idx])
+        
+        return max(dp)
         
         
-        for ind in range(n-1,-1,-1):
-            for prev in range(ind-1,-2,-1):
-                nottake = dp[ind+1][prev+1]
-                take =0
-                if prev==-1 or nums[ind]>nums[prev]:
-                    take = 1+dp[ind+1][ind+1] 
-                dp[ind][prev+1] = max(take, nottake)
+        
+## Tabulation:
+        
+#         dp=[[0]*(n+1) for _ in range(n+1)]
+        
+        
+#         for ind in range(n-1,-1,-1):
+#             for prev in range(ind-1,-2,-1):
+#                 nottake = dp[ind+1][prev+1]
+#                 take =0
+#                 if prev==-1 or nums[ind]>nums[prev]:
+#                     take = 1+dp[ind+1][ind+1] 
+#                 dp[ind][prev+1] = max(take, nottake)
 
-        return dp[0][-1+1]
+#         return dp[0][-1+1]
+
+## Recurrence:
+
         
 #         def f(i,prev):
 #             if i==n:
