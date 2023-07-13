@@ -5,17 +5,17 @@ class Solution:
         
         temp=[]
         temp.append(nums[0])
-        length=1
         
         for i in range(1,n):
+            # print(nums[i])
             if nums[i]>temp[-1]:
-                length+=1
                 temp.append(nums[i])
             else:
                 idx = bisect_left(temp,nums[i])
+                # print(temp,idx,nums[i])
                 temp[idx]=nums[i]
         
-        return length
+        return len(temp)
                 
         
 ## Algorithmic
