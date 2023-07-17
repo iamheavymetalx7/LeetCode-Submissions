@@ -1,17 +1,26 @@
 class Solution:
     def maximumJumps(self, nums: List[int], target: int) -> int:
         n=len(nums)
+        MIN_INF = -10**9
         dp=[-1]*(n)
         
-        
-        dp[0]=0
-        
-        
-        for i in range(n):
-            if dp[i]==-1:continue
+        def recur(idx):
+            if idx==n-1:
+                return 0
             
-            for j in range(i+1,n):
-                if abs(nums[i]-nums[j])<=target:
-                    dp[j] = max(dp[j],dp[i]+1)
+            if dp[idx]!=-1:
+                return dp[idx]
+            
+            ans = MIN_INF
+            for j in range(idx+1,n):
+                if abs(nums[j]-nums[idx])<=target:
+                    ans = max(ans,1+recur(j))
+            
+            dp[idx]=ans
+            return dp[idx]
         
-        return -1 if dp[-1]==-1 else dp[-1]
+        ans =  recur(0)
+        if ans<0:
+            return -1
+        return ans
+            
