@@ -1,21 +1,23 @@
 #User function Template for python3
-from collections import deque
+
 
 class Solution:
     def nextLargerElement(self,arr,n):
         #code here
-        stack=deque()
-        ans=[0]*n
         
-        for i in range(n-1,-1,-1):
-            while len(stack)>0 and stack[-1]<=arr[i]:
-                stack.pop()
-            if len(stack)==0:
-                ans[i]=-1
+        st = []
+        ans= [-1]*(n)
+        
+        for i in range(n):
+            while st and arr[st[-1]]<arr[i]:
+                idx = st.pop()
+                ans[idx] = arr[i]
+
             else:
-                ans[i]=stack[-1]
-            stack.append(arr[i])
+                st.append(i)
+
         return ans
+
 #{ 
  # Driver Code Starts
 #Initial Template for Python 3
