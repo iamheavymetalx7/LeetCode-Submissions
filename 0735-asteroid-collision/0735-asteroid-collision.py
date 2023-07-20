@@ -1,23 +1,26 @@
 class Solution:
-    def asteroidCollision(self, ast: List[int]) -> List[int]:
+    def asteroidCollision(self, a: List[int]) -> List[int]:
+        n = len(a)
         
         st=[]
-        n=len(ast)
         
-        for ele in ast:
-            while st and ele<0<st[-1]:
-                if st[-1]<-1*ele:
+        for x in a:
+            if not st:
+                st.append(x)
+                continue
+            
+            if st[-1]>0 and x<0:
+                f = 0
+                while st and abs(st[-1])<=abs(x) and st[-1]>0 and x<0 and not f:
+                    if abs(st[-1])==abs(x):
+                        f=1
                     st.pop()
-                    continue
-                elif st[-1]==(-1)*ele:
-                    st.pop()
-                break
+                
+                if (not st or (st[-1]<0 and x<0) or (st[-1]>0 and x>0)) and not f:
+                    st.append(x)
+            
+            
             else:
-                st.append(ele)
+                st.append(x)
+            
         return st
-                
-                    
-
-                
-                
-                
