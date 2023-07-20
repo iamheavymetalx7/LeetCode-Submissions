@@ -1,26 +1,51 @@
 class Solution:
     def countPalindromes(self, s: str) -> int:
-        MOD = 1000000007
+        
+        n=len(s)
+        
+        
+        mod = int(1e9)+7
+        
+        if n<5:
+            return 0
+        if n==5:
+            if s==s[::-1]:
+                return 1
+            return 0
         
         @cache
-        def dp(idx: int, first: int, second: int, sz: int) -> int:
-            if sz == 5:
+        def dfs(idx,first,second,i):
+            
+            if i==5:
                 return 1
-            if idx == len(s):
+            if idx==n:
                 return 0
-            res = dp(idx + 1, first, second, sz)
-            if sz == 0:
-                res = (res + dp(idx + 1, (ord(s[idx]) - ord('0')), second, sz + 1)) % MOD
-            elif sz == 1:
-                res = (res + dp(idx + 1, first, (ord(s[idx]) - ord('0')), sz + 1)) % MOD
-            elif sz == 2:
-                res = (res + dp(idx + 1, first, second, sz + 1)) % MOD
-            elif sz == 3:
-                if ord(s[idx]) - ord('0') == second:
-                    res = (res + dp(idx + 1, first, second, sz + 1)) % MOD
-            elif sz == 4:
-                if ord(s[idx]) - ord('0') == first:
-                    res = (res + dp(idx + 1, first, second, sz + 1)) % MOD
+            
+
+            ## not choosing
+            res = dfs(idx+1,first,second,i)
+            
+            # choosing
+            
+            if i==0:    ## first digit
+                res += dfs(idx+1,int(s[idx]),second,i+1)
+                res %= mod
+            elif i==1:  ## second digit
+                res += dfs(idx+1,first,int(s[idx]),i+1)
+                res %= mod
+            elif i==2: # third digit can be anything 
+                res += dfs(idx+1,first,second,i+1)
+                res %= mod
+            elif i==3:   # 4th digit should be same as second one
+                if int(s[idx])==second:
+                    res += dfs(idx+1,first, second,i+1)
+                    res %= mod
+            elif i==4:  # 5th digit should be same as second one
+                if int(s[idx])==first:
+                    res += dfs(idx+1, first ,second, i+1)
+                    res %= mod
+            
             return res
-        
-        return dp(0, 10, 10, 0)
+        ans = dfs(0,10,10,0)
+        return ans
+                
