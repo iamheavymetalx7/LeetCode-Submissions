@@ -1,33 +1,36 @@
-#multi source shortest path algorithm
-# detects negative cycles also!
-
+#User function template for Python
 
 class Solution:
-	def shortest_distance(self, matrix):
-        n=len(matrix)
-        
+	def shortest_distance(self, mat):
+		#Code here
+		
+		n,m=len(mat),len(mat[0])
+
         for i in range(n):
             for j in range(n):
-                if matrix[i][j]==-1:
-                    matrix[i][j]=100000000
+                if mat[i][j]==-1:
+                    mat[i][j]=int(1e9)
                 if i==j:
-                    matrix[i][j]=0
+                    mat[i][j]=0
                     
+        
         for k in range(n):
             for i in range(n):
                 for j in range(n):
-                    matrix[i][j] = min(matrix[i][j],matrix[i][k]+matrix[k][j])
-
+                    mat[i][j]= min(mat[i][j], mat[i][k]+mat[k][j])
+        
+        
+        
+        
         for i in range(n):
-            if matrix[i][i]<0:
-                return "contanins negative cycle"
-                
-
+            if mat[i][i]<0:
+                print("contains negative cycle")
+        
         for i in range(n):
             for j in range(n):
-                if matrix[i][j]==10**8:
-                    matrix[i][j]=-1
-                
+                if mat[i][j]==int(1e9):
+                    mat[i][j]=-1
+
 #{ 
  # Driver Code Starts
 #Initial template for Python 
