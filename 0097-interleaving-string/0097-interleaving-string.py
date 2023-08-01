@@ -17,12 +17,12 @@ class Solution:
                 return s1[i:]==s3[i+j:]
             
             
-            choose1,choose2=False,False
+            ans = False
             
             if s1[i]==s3[i+j]:
-                choose1 = recur(i+1,j)
+                ans |= recur(i+1,j)
             if s2[j]==s3[i+j]:
-                choose2 =recur(i,j+1)
+                ans |= recur(i,j+1)
                 
-            return choose1 or choose2
+            return ans
         return recur(0,0)
