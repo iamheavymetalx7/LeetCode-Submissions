@@ -1,12 +1,14 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        n =len(nums)
+        
         ans =[]
+        n=len(nums)
         
-        vis = [0]*(n)
+        vis =[0]*(n)
         
         
-        def recur(arr):
+        def recur(idx,arr):
+            
             if len(arr)==n:
                 ans.append(arr.copy())
                 return
@@ -14,12 +16,14 @@ class Solution:
             for i in range(n):
                 if vis[i]:
                     continue
+                
                 arr.append(nums[i])
                 vis[i]=1
-                recur(arr)
+                recur(i+1,arr)
                 vis[i]=0
                 arr.pop()
+        recur(0,[])
+        return ans
+                    
                 
-        recur([])
         
-        return (ans)
