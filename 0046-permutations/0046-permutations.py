@@ -1,50 +1,25 @@
 class Solution:
-
     def permute(self, nums: List[int]) -> List[List[int]]:
-        ans=[]
+        n =len(nums)
+        ans =[]
         
-        def recur(index):
-            if index>=len(nums):
-                ans.append(nums.copy())
+        vis = [0]*(n)
+        
+        
+        def recur(arr):
+            if len(arr)==n:
+                ans.append(arr.copy())
                 return
             
-            for i in range(index,len(nums)):
-                nums[index],nums[i]=nums[i],nums[index]
+            for i in range(n):
+                if vis[i]:
+                    continue
+                arr.append(nums[i])
+                vis[i]=1
+                recur(arr)
+                vis[i]=0
+                arr.pop()
                 
-                recur(index+1)
-                
-                nums[index],nums[i]=nums[i],nums[index]
-        recur(0)
-        return ans
-            
+        recur([])
         
-        
-        
-        
-        
-        
-        
-        
-'''
-from collections import defaultdict
-class Solution:
-    def recursion(self,ans,ds,nums,freq):
-        if len(ds)==len(nums):
-            ans.append(ds.copy())
-            return
-        for i in range(len(nums)):
-            if not freq[i]:
-                ds.append(nums[i])
-                freq[i]=1
-                self.recursion(ans,ds,nums,freq)
-                freq[i]=0
-                ds.pop()
-    
-    def permute(self, nums: List[int]) -> List[List[int]]:
-        ans=[]
-        ds=[]
-        freq=[0]*len(nums)
-        self.recursion(ans,ds,nums,freq)
-        return ans
-
-'''
+        return (ans)
