@@ -18,9 +18,7 @@ class Solution:
                 if i>idx and nums[i]==nums[i-1]:
                     continue
                 
-                arr.append(nums[i])
-                recur(i+1,tt-nums[i],arr)
-                arr.pop()
+                recur(i+1,tt-nums[i],arr+[nums[i]])
         recur(0,target,[])
         
         return ans
