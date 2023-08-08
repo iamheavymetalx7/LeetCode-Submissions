@@ -16,8 +16,8 @@ class Solution:
                 
                 
                 for adj in graph[node]:
-                    if adj==node:
-                        continue
+                    # if adj==node:
+                    #     continue
 
                     if color[adj]==-1:
                         color[adj]=1-color[node]
