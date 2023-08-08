@@ -10,6 +10,9 @@ class Solution:
         ## if baord[i][j]=1 and lc==2 or lc==3 :  no need to update/change
         ## if not b[i][j] and lc==3: 2
         
+        ## simultaneously: shoud not use DFS/BFS
+
+        
         dire =[(1,0),(0,1),(0,-1),(-1,0),(-1,-1),(-1,1),(1,1),(1,-1)]
         
         n,m=len(board),len(board[0])
