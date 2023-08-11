@@ -9,17 +9,15 @@ class Solution:
         
         for r in range(n):
             
-            if nums[r] in dic or len(dic)==k:
+            while nums[r] in dic or len(dic)==k:
                 if len(dic)==k:
-                    maxi =max(maxi,summ)
-
-                while nums[r] in dic or len(dic)==k:
-                    dic[nums[l]]-=1
-                    summ-=nums[l]
-                    if dic[nums[l]]==0:
-                        del dic[nums[l]]
+                    maxi=max(maxi,summ)
+                dic[nums[l]]-=1
+                summ-=nums[l]
+                if dic[nums[l]]==0:
+                    del dic[nums[l]]
                         
-                    l+=1
+                l+=1
             summ+=nums[r]
             dic[nums[r]]+=1
             
