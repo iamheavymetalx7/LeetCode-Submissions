@@ -9,8 +9,8 @@ class Solution:
         
         for r in range(n):
             
-            while nums[r] in dic or len(dic)==k:
-                if len(dic)==k:
+            while nums[r] in dic or r-l==k:
+                if r-l==k:
                     maxi=max(maxi,summ)
                 dic[nums[l]]-=1
                 summ-=nums[l]
@@ -22,6 +22,6 @@ class Solution:
             dic[nums[r]]+=1
             
             
-        if len(dic)==k:
+        if r+1-l==k:
             maxi= max(maxi,summ)
         return maxi
