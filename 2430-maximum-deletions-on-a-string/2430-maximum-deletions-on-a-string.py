@@ -4,7 +4,6 @@ class Solution:
         if len(set(s))==1:
             return n
     
-        # print(s,"start")
         
         @cache
         def recur(i):
@@ -12,9 +11,8 @@ class Solution:
                 return 0
             
             ans = 1
-            for l in range(1,len(s[i:])):
+            for l in range(1,n):
                 if i+l<=n and i+2*l<=n:
-                    # print(s[i:i+l],s[i+l:i+2*l],s[i+l:])
                     if s[i:i+l]==s[i+l:i+2*l]:
                         ans = max(1+recur(i+l),ans)
                 else:
