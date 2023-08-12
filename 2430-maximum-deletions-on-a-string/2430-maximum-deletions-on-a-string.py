@@ -8,9 +8,9 @@ class Solution:
         @cache
         def recur(i):
             if i==n:
-                return 0
+                return 1
             
-            ans = 1
+            ans = 0
             for l in range(1,n):
                 if i+l<=n and i+2*l<=n:
                     if s[i:i+l]==s[i+l:i+2*l]:
@@ -19,7 +19,7 @@ class Solution:
                     break
             return ans
         
-        val = recur(0)
+        val = 1+recur(0)
             
         return val
                         
