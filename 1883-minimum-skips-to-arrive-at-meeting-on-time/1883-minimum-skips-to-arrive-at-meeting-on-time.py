@@ -9,18 +9,18 @@ class Solution:
         inf = int(1e19)
         e=1e-9
         
-        
+        @cache
         def recur(i,skips):
             if i>=n:
                 return 0
             if skips<0:
                 return inf
             
-            if dp[i][skips]!=-1:
-                return dp[i][skips]
+            # if dp[i][skips]!=-1:
+            #     return dp[i][skips]
             
-            dp[i][skips]  = dist[i]/speed+min(recur(i+1,skips-1),ceil(recur(i+1,skips)-e))
-            return dp[i][skips]
+            return dist[i]/speed+min(recur(i+1,skips-1),ceil(recur(i+1,skips)-e))
+            # return dp[i][skips]
         
         l=-1;r=n
         
