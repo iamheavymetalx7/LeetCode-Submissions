@@ -1,22 +1,17 @@
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
-        ans = []
-        pq =[]
         
-
+        heap= []
         
-        
-        
+        ans =[]
         for i in range(k):
-            heappush(pq,[-nums[i],i])
-        
-        ans.append(-1*pq[0][0])
-        
+            heappush(heap,(-nums[i],i))
+        ans.append(-heap[0][0])
         for i in range(k,len(nums)):
             
-            while pq and pq[0][1]<=i-k:
-                heappop(pq)
+            while heap and heap[0][1]<=i-k:
+                heappop(heap)
+            heappush(heap,(-nums[i],i))
             
-            heappush(pq,[-nums[i],i])
-            ans.append(-1*pq[0][0])
+            ans.append(-heap[0][0])
         return ans
