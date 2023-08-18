@@ -1,12 +1,28 @@
+'''
+neetcode
+'''
 class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
-        cf = Counter(tasks)
+        count = Counter(tasks)
         
-        maxi = max(cf.values())
+        maxHeap =[-cnt for cnt in count.values()]
+        heapify(maxHeap)
         
-        arr=[v for v in cf.values()]
         
-        cnt_maxi = arr.count(maxi)
+        q=deque() # pairs of values [-cnt,idleTime]
+        time =0
         
-        ans = max(len(tasks), (n+1)*(maxi-1)+cnt_maxi)
-        return ans
+        while maxHeap or q:
+            time+=1
+            
+            if maxHeap:
+                cnt  = 1+ heappop(maxHeap)
+                if cnt:
+                    q.append([cnt,time+n])
+            if q and q[0][1]==time:
+                heappush(maxHeap,q.popleft()[0])
+                
+        return time
+                    
+            
+        
