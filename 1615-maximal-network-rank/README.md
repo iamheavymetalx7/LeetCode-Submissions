@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/maximal-network-rank/">1615. Maximal Network Rank</a></h2><h3>Medium</h3><hr><div><p>There is an infrastructure of <code>n</code> cities with some number of <code>roads</code> connecting these cities. Each <code>roads[i] = [a<sub>i</sub>, b<sub>i</sub>]</code> indicates that there is a bidirectional road between cities <code>a<sub>i</sub></code> and <code>b<sub>i</sub></code>.</p>
+<h2><a href="https://leetcode.com/problems/maximal-network-rank/solution/">1615. Maximal Network Rank</a></h2><h3>Medium</h3><hr><div><p>There is an infrastructure of <code>n</code> cities with some number of <code>roads</code> connecting these cities. Each <code>roads[i] = [a<sub>i</sub>, b<sub>i</sub>]</code> indicates that there is a bidirectional road between cities <code>a<sub>i</sub></code> and <code>b<sub>i</sub></code>.</p>
 
 <p>The <strong>network rank</strong><em> </em>of <strong>two different cities</strong> is defined as the total number of&nbsp;<strong>directly</strong> connected roads to <strong>either</strong> city. If a road is directly connected to both cities, it is only counted <strong>once</strong>.</p>
 
