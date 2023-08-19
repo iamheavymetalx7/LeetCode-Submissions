@@ -13,7 +13,6 @@ class Solution:
             
             if len(pq)>k:
                 tot-=heappop(pq)
-            # print(tot,"toto")
             if len(pq)==k:
                 ans=max(ans, tot*x)
         return ans
