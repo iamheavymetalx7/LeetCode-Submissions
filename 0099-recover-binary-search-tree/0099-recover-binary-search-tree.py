@@ -4,34 +4,35 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+
+## now in O(1) space
+
 class Solution:
     def recoverTree(self, root: Optional[TreeNode]) -> None:
         """
         Do not return anything, modify root in-place instead.
         """
+        self.first,self.sec,self.prev = None,None,None
+
+        self.inOrder(root)
+        self.first.val,self.sec.val = self.sec.val,self.first.val
         
-        inorder =[]
+    def inOrder(self,root):
+        if not root:
+            return
+
+        self.inOrder(root.left)
+
+        if self.prev:
+            if self.prev.val>root.val:
+                if not self.first:
+                    self.first = self.prev
+                self.sec = root 
+        self.prev=root
+
+        self.inOrder(root.right)
+
+
         
-        def dfs(node):
-            if not node:
-                return
-            dfs(node.left)
-            inorder.append(node.val)
-            dfs(node.right)
-        dfs(root)
         
-        inorder.sort()
-        
-        i=0
-        
-        def dfs(node):
-            nonlocal i
-            if not node:
-                return
-            dfs(node.left)
-            print(inorder[i],node.val)
-            if inorder[i]!=node.val:
-                node.val = inorder[i]
-            i+=1
-            dfs(node.right)
-        dfs(root)
