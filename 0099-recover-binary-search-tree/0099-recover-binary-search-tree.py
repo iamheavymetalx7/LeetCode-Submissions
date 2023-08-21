@@ -13,26 +13,26 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
-        self.first,self.sec,self.prev = None,None,None
-
-        self.inOrder(root)
-        self.first.val,self.sec.val = self.sec.val,self.first.val
         
-    def inOrder(self,root):
-        if not root:
-            return
-
-        self.inOrder(root.left)
-
-        if self.prev:
-            if self.prev.val>root.val:
-                if not self.first:
-                    self.first = self.prev
-                self.sec = root 
-        self.prev=root
-
-        self.inOrder(root.right)
-
-
+        first,sec,prev = [None]*(3)
+        
+        def inOrder(root):
+            nonlocal first,sec,prev
+            if not root:
+                return
+            
+            inOrder(root.left)
+            
+            if prev:
+                if prev.val>root.val:
+                    if not first:
+                        first = prev
+                    sec = root 
+            prev=root
+            
+            inOrder(root.right)
+        
+        inOrder(root)
+        first.val,sec.val = sec.val,first.val
         
         
