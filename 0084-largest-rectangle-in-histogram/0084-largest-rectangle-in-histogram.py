@@ -9,7 +9,7 @@ class Solution:
         
         for i in range(n):
             
-            while st and heights[st[-1]]>heights[i]:
+            while st and heights[st[-1]]>=heights[i]:
                 top = st.pop()
                 next_smaller[top]=i
             
@@ -19,8 +19,8 @@ class Solution:
             
         maxArea= 0
         
-#         print(next_smaller)
-#         print(prev_smaller)
+        print(next_smaller)
+        print(prev_smaller)
         
         for i in range(n):
             h = heights[i]
