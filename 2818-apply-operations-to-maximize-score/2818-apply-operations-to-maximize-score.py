@@ -1,16 +1,19 @@
 nmax=10**5
-sieve = [0,0]+[0 for _ in range(nmax+1)]
+primes = []
+sieve = [1,1]+[1 for _ in range(nmax+1)]
 
 for i in range(2,int(math.sqrt(nmax))+1):
-    for j in range(i*i,nmax+1,i):     ##this step of i**2 is important
-        if sieve[j]==0:
-            sieve[j]=i
-            
-for i in range(nmax+1):
-    if not sieve[i]:
-        sieve[i]=i
-            
+    if sieve[i]==1:
+        sieve[i]=max(i,sieve[i])
+        for j in range(i*i,nmax,i):     ##this step of i**2 is important
+            sieve[j] = max(sieve[j],i)
 
+for i in range(nmax+1):
+    if sieve[i]==1:
+        sieve[i]=i
+
+print(sieve[11047])
+# print(len(primes))
 # print(sieve)
 
 class Solution:
@@ -20,8 +23,11 @@ class Solution:
 
         def calc_score(x):
             res= 0
+            # print(x,"hehehhe")
             while x!=1:
                 div = sieve[x]
+                # print("divisor",div)
+                
                 while x%div==0:
                     x=x//div
                 res+=1
@@ -51,8 +57,8 @@ class Solution:
             st.append(i)
                 
             
-        # print(prev_bigger,"prev_smaller")
-        # print(next_bigger)
+        print(prev_bigger,"prev_smaller")
+        print(next_bigger)
         
         arr=[]
         for i in range(n):
@@ -63,7 +69,7 @@ class Solution:
         mod = int(1e9)+7
         result = 1
         arr.sort(reverse=True)
-        # print(arr)
+        print(arr)
         
         for num,freq in arr:
             if k==0:
