@@ -5,7 +5,7 @@ sieve = [1,1]+[1 for _ in range(nmax+1)]
 for i in range(2,int(math.sqrt(nmax))+1):
     if sieve[i]==1:
         sieve[i]=max(i,sieve[i])
-        for j in range(i*i,nmax,i):     ##this step of i**2 is important
+        for j in range(i,nmax,i):     ##this step of i**2 is important
             sieve[j] = max(sieve[j],i)
 
 for i in range(nmax+1):
