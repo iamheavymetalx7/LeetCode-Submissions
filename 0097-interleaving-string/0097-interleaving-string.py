@@ -1,31 +1,25 @@
 class Solution:
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
         
-
+        n=len(s1)
+        m=len(s2)
+        o=len(s3)
+        if o!=(n+m):
+            return False
         
-        n,m,k = len(s1),len(s2),len(s3)
-        
-        if n+m!=k:
-            return False     
-        
-        dp =[[-1]*(m) for _ in range(n)]
-        
+        @cache
         def recur(i,j):
-            if i==len(s1):
-                return s2[j:]==s3[i+j:]
+            if i+j==len(s3):
+                return True
             
-            if j==len(s2):
-                return s1[i:]==s3[i+j:]
-            
-            if dp[i][j]!=-1:
-                return dp[i][j]
             ans = False
             
-            if s1[i]==s3[i+j]:
-                ans |= recur(i+1,j)
-            if s2[j]==s3[i+j]:
+            if i<n and s3[i+j]==s1[i]:
+                ans  |= recur(i+1,j)
+            if j<m and s3[i+j]==s2[j]:
                 ans |= recur(i,j+1)
-                
-            dp[i][j] = ans
-            return dp[i][j]
-        return recur(0,0)
+            
+            
+            return ans
+        val = recur(0,0)
+        return val
