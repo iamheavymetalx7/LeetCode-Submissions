@@ -15,7 +15,7 @@ class Solution:
             if stops>k:
                 continue
             for el,wei in adj[node]:
-                if cost[el]>wei+wt and stops<=k:
+                if cost[el]>wei+wt:
                     cost[el]=wei+wt 
                     q.append([wei+wt,el,stops+1])
         
