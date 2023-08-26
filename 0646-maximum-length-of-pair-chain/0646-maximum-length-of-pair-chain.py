@@ -1,23 +1,15 @@
+'''
+this greedy approach of sorting pairs based on the second element and then greedily picking pairs whenever we can starting from the first pair will always give the length of the longest chain.
+'''
 class Solution:
     def findLongestChain(self, pairs: List[List[int]]) -> int:
-        pairs.sort()
-        # print(pairs)
-        n=len(pairs)
+        pairs.sort(key = lambda x:x[1])
         
-        @cache
-        def recur(idx,prev):
-            if idx>=n:
-                return 0
-            
-            ans = 0
-            
-            ##take case
-            if prev==-1 or pairs[prev][1]<pairs[idx][0]:
-                ans =max(ans,1+recur(idx+1,idx))
-            
-            # nottake case
-            ans = max(ans, recur(idx+1,prev))
-            
-            return ans
-        val = recur(0,-1)
-        return val
+        cnt=0
+        curr=-int(1e19)
+        
+        for pair in pairs:
+            if pair[0]>curr:
+                cnt+=1
+                curr=pair[1]
+        return cnt
