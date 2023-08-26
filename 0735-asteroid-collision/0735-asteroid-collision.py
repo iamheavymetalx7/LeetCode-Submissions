@@ -2,25 +2,37 @@ class Solution:
     def asteroidCollision(self, a: List[int]) -> List[int]:
         n = len(a)
         
-        st=[]
         
-        for x in a:
-            if not st:
-                st.append(x)
-                continue
-            
-            if st[-1]>0 and x<0:
-                f = 0
-                while st and abs(st[-1])<=abs(x) and st[-1]>0 and x<0 and not f:
-                    if abs(st[-1])==abs(x):
-                        f=1
-                    st.pop()
-                
-                if (not st or (st[-1]<0 and x<0) or (st[-1]>0 and x>0)) and not f:
-                    st.append(x)
-            
-            
+        st=[]
+        i=n-1
+        ans=[]
+        while i>=0:
+            if a[i]<0:
+                st.append(a[i])
             else:
-                st.append(x)
+                r = a[i]
+                
+                while st and r>0:
+                    if r>abs(st[-1]):
+                        st.pop()
+                    else:
+                        l=st.pop()
+                        
+                        # print(abs(l),r)
+                        if abs(l)>r:
+                            r=0
+                        
+                            st.append(l)
+                        else:
+                            r=0
+                            continue
+                    
+                if r>=1:
+                     ans.append(r)
+            i-=1
+        cur=[]
+        while st:
+            cur.append(st.pop())
+        cur.extend(ans[::-1])
+        return (cur)
             
-        return st
