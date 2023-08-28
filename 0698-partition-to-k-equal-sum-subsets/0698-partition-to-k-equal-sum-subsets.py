@@ -29,11 +29,8 @@ class Solution:
                     continue
                 
                 if curSum+nums[i]<=subsetVal:   # we take element only if it is less than overall subset sum
-                    newmask = mask^(1<<i)   # we can use OR also here, but i like XOR
-                    ans |= recur(k,newmask,curSum+nums[i])      
-                    ## we can remove the new mask above and below this line and instead use:                     ans |= recur(k,mask^(1<<i),curSum+nums[i])
+                    ans |= recur(k,mask^(1<<i),curSum+nums[i])      
 
-                    newmask^=(1<<i)
             
             dp[mask]=ans
             return ans
