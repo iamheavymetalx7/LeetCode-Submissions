@@ -19,10 +19,10 @@ class Solution:
                     ops= (nums[i]//nums[i+1])
                     operations+=ops-1
                     
-                    nums[i]=nums[i] /(ops)
+                    nums[i]=nums[i] //(ops)
                 else:
                     ops = (nums[i]//nums[i+1])+1
                     operations+=ops-1
                     nums[i] = nums[i]//ops
         
-        return int(operations)
+        return operations
