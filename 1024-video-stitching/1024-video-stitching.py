@@ -1,37 +1,31 @@
+'''
+this approach is taken using the help of  https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/submissions/
+'''
 class Solution:
     def videoStitching(self, clips: List[List[int]], time: int) -> int:
-        clips.sort(key = lambda x:x[0])
-        
-        # print(clips)
-        ## i think it is based on take - nottake scenario
-        ## if we take, we are taking where last_end>=first_curr
-        
+        clips.sort()
+
+        int_max = int(1e19)
         n=len(clips)
         
         @cache
-        def recur(idx,last):
-            
+        def recur(idx):
+            if clips[idx][1]>=time:
+                return 1
             if idx>=n:
-                if last>=time:
-                    return 0
-                return int(1e19)
-            
-            ans = int(1e19)
-            
-            ## take case
-            if last>=clips[idx][0]:
-                ans=min(1+recur(idx+1,clips[idx][1]),ans)
-            
-            ## not take case
-            ans = min(ans,recur(idx+1,last))
-            
+                return int_max
+            ans = int_max
+            for j in range(idx+1,n):
+                if clips[j][0]>clips[idx][1]:
+                    break
+                ans = min(ans,1+recur(j))
             return ans
         
-        val = recur(0,0)
+        val = int_max
         
-        if val == int(1e19):
-            return -1
-        return val
+        for i in range(n):
+            if clips[i][0]==0:
+                val = min(val, recur(i))
         
-            
+        return val if val!=int_max else -1
                 
