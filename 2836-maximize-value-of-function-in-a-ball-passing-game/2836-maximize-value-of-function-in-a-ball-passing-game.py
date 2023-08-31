@@ -9,12 +9,12 @@ class Solution:
         
         for j in range(n):
             dst[0][j] = receiver[j]
-            sum_[0][j] = j+receiver[j]
+            sum_[0][j] = receiver[j]
         
         for i in range(1,BITS):
             for j in range(n):
                 dst[i][j] = dst[i-1][dst[i-1][j]]
-                sum_[i][j] = sum_[i-1][dst[i-1][j]]+sum_[i-1][j] - dst[i-1][j]
+                sum_[i][j] = sum_[i-1][dst[i-1][j]]+sum_[i-1][j]
                 
         final_dst=[0 for _ in range(n)]
         final_sum =[0 for _ in range(n)]
@@ -27,7 +27,7 @@ class Solution:
             if (1<<i)&(k)==0:
                 continue
             for j in range(n):
-                final_sum[j] = sum_[i][final_dst[j]] +final_sum[j]- final_dst[j]
+                final_sum[j] = sum_[i][final_dst[j]] +final_sum[j]
                 final_dst[j] = dst[i][final_dst[j]]
         
         ans =0
