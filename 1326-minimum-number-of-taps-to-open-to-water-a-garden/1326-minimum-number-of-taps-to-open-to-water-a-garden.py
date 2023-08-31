@@ -1,8 +1,10 @@
+'''
+reference:
+https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/discuss/3982919/C%2B%2B-oror-DP-(recursion-%2B-memoization)-oror-Day-31
+'''
 class Solution:
     def minTaps(self, n: int, ranges: List[int]) -> int:
-        
-        arr= [0 for _ in range(int(1e4)+500)]
-        
+            
         intervals= []
         INT_MAX = int(1e19)
         for i in range(len(ranges)):
