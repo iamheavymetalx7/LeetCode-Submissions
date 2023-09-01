@@ -6,7 +6,7 @@ class Solution:
         
         ## initially we have one character
         # recur(x,prev) -> current length, len of prev copied element
-        
+        @cache
         def recur(x,prev):
             if x>=n:
                 if x==n:
