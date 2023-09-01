@@ -1,23 +1,24 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        
+        ## sliding window techinque
         n=len(s)
-        dic = defaultdict(int)
-        maxi=0
+        if not s:return 0
         l=0
+        dic = defaultdict(int)
+        maxi =0
         for r in range(n):
-            # print(l,r,dic)
-            while l<=r and s[r] in dic:
+            while s[r] in dic:
                 dic[s[l]]-=1
-            
                 
                 if dic[s[l]]==0:
                     del dic[s[l]]
-                l+=1
-                    
-            dic[s[r]]+=1
-            maxi=max(r-l+1,maxi)
-        
-        return maxi
                 
-        
+                l+=1
+                
+
+            dic[s[r]]+=1
+            r+=1
+            maxi=max(r-l,maxi)
+        maxi = max(r-l,maxi)
+
+        return maxi
