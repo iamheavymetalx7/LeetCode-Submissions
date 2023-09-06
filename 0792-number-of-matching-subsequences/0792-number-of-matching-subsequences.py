@@ -7,6 +7,7 @@ inally, we only go thru S once, and go thru each letter in each word once, there
 
 However the implementation in this post is having a higher time complexity, since string slicing is linear time.
 
+In order to reduce that, we can do it by storing indices
 
 '''
 class Solution:
@@ -16,16 +17,16 @@ class Solution:
         cnt = 0
         
         for word in words:
-            word_dict[word[0]].append(word)
+            word_dict[word[0]].append((word,0))
         
         
         for char in s:
-            start_word_expected = word_dict[char]
+            temp = word_dict[char]
             word_dict[char]=[]
             
-            for ele in start_word_expected:
-                if len(ele)==1:
+            for word,index in temp:
+                if index+1==len(word):
                     cnt+=1
                 else:
-                    word_dict[ele[1]].append(ele[1:])
+                    word_dict[word[index+1]].append((word,index+1))
         return cnt
