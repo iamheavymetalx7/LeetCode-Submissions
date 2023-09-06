@@ -5,6 +5,6 @@ SET N=N-1;
 
   RETURN (
       SELECT DISTINCT salary FROM Employee ORDER BY salary DESC 
-      LIMIT N,1 ## -> this behaves like offset
+      LIMIT 1 OFFSET N      
   );
 END
