@@ -1,11 +1,18 @@
 class Solution:
     def hIndex(self, cite: List[int]) -> int:
-        cite.sort(reverse=True)
-        
         n=len(cite)
-        ans=0
+        buckets= [0 for _ in range(n+1)]
         
-        for i in range(n):
-            if cite[i]>=i+1:
-                ans+=1
-        return ans
+        for c in cite:
+            if c>=n:
+                buckets[n]+=1
+            else:
+                buckets[c]+=1
+        # print(buckets)
+        count =0
+        for i in range(n,-1,-1):
+            count+=buckets[i]
+            
+            if count>=i:
+                return i
+        
