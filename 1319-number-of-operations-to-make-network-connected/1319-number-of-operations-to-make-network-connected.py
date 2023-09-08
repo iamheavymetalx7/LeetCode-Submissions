@@ -1,30 +1,57 @@
-from collections import defaultdict
+class UnionFind:
+    def __init__(self,n):
+        self.par= [i for i in range(n)]
+        self.rank =[1 for i in range(n)]
+    
+    def find(self,x):
+        p=self.par[x]
+        
+        while p!=self.par[p]:
+            self.par[p]=self.par[self.par[p]]
+            p=self.par[p]
+        return p
+    
+    def issame(self,x,y):
+        p1,p2 = self.find(x),self.find(y)
+        if p1==p2:
+            return True
+        return False
+    
+    def merge(self,x,y):
+        p1,p2 = self.find(x),self.find(y)
+        if p1==p2:
+            return True
+        
+        if self.rank[p1]<self.rank[p2]:
+            self.par[p1]=p2
+            self.rank[p2]+=1
+        else:
+            self.par[p2]=p1
+            self.rank[p1]+=1
+            
+        
+        return False
+
+            
 class Solution:
     def makeConnected(self, n: int, connections: List[List[int]]) -> int:
-        # print(len(connections))
-        if len(connections)<(n-1):
-            return -1
         
-        seen=set([i for i in range(n)])
-        vis=set()        
-        graph=defaultdict(list)
+        uf= UnionFind(n)
+        cnt=0
+        
         for x,y in connections:
-            graph[x].append(y)
-            graph[y].append(x)
-            
-        components = 0
+            if uf.issame(x,y):
+                cnt+=1
+            else:
+                uf.merge(x,y)
         
+        dic = defaultdict(list)
         
-        def dfs(u):
-            if u in vis:
-                return
-            vis.add(u)
-            for v in graph[u]:
-                dfs(v)
-                
         for i in range(n):
-            if i not in vis:
-                dfs(i)
-                components+=1
+            dic[uf.find(i)].append(i)
         
-        return components-1
+
+        
+        if len(dic)-1 > cnt:
+            return -1
+        return len(dic)-1
