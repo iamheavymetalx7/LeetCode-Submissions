@@ -55,10 +55,10 @@ class Solution:
                 if mask!=0 or mask!=((1<<n)-1):
                     cnt_length_palindrome(mask)
                 return mask
-            mask ^= (1<<idx)
-            recur(idx+1,mask)
-            mask ^= (1<<idx)
-            recur(idx+1,mask)
+            for i in range(idx,n):
+                mask ^= (1<<i)
+                recur(i+1,mask)
+                mask ^= (1<<i)
         
 
         recur(0,0)
