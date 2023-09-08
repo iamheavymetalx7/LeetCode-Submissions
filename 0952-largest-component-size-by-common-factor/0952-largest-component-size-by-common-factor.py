@@ -1,4 +1,6 @@
-
+'''
+the previous implementation had error in the sieve function, sieve[i]=i for all i is the correct implementation
+'''
 class UnionFind:
     def __init__(self,n):
         self.par=[i for i in range(n)]
@@ -29,17 +31,25 @@ class UnionFind:
 
 
 
-            
+mx = 10**5
+    
+spf =[i for i in range(mx+1)]
+
+for i in range(2,int(math.sqrt(mx))+1):
+    if spf[i]==i:
+        for j in range(i*i,mx+1,i):
+            spf[j]=i
+
 
 class Solution:
     def largestComponentSize(self, nums: List[int]) -> int:
-
-        def primes_set(a):
-            for i in range(2, int(math.sqrt(a))+1):
-                if a % i == 0:
-                    return primes_set(a//i) | set([i])
-            return set([a])
-
+        
+        def calc_prime_facs(x):
+            while x!=1:
+                yield spf[x]
+                x//=spf[x]
+            
+            
             
         
         n=len(nums)
@@ -47,8 +57,8 @@ class Solution:
         uf = UnionFind(n)
         primes = defaultdict(list)
         for i in range(n):
-            prime_fac = primes_set(nums[i])
-            for q in prime_fac:
+            
+            for q in calc_prime_facs(nums[i]):
                 primes[q].append(i)
         
         for _,indexes in primes.items():
@@ -62,5 +72,3 @@ class Solution:
             counter[uf.find(i)]+=1
         
         return max(counter.values())
-        
-        
