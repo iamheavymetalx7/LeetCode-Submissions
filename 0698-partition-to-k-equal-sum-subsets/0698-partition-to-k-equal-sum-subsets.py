@@ -1,41 +1,35 @@
+'''
+https://leetcode.com/problems/partition-to-k-equal-sum-subsets/discuss/2281522/Python-or-90ms-Faster-than-92-or-95-Less-Memory
+
+'''
+
 class Solution:
     def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
         
-        
+        s = sum(nums)
         n=len(nums)
-        ss=sum(nums)
-        if ss%k!=0:
+        
+        if s%k!=0:
             return False
         
-        subsetVal = ss//k
+        subset_val = s//k
         
-        # dp =[-1 for _ in range((1<<n)-1)]
+        arr=[0]*(k)
         
-        @cache
-        def recur(k,mask,curSum):
-            if k==0:
-                return mask==(1<<n)-1
+        def recur(idx,subset_val):
+            if idx==n:
+                return True
             
-            if curSum == subsetVal:
-                return recur(k-1,mask,0)
+            curr = nums[idx]
             
-            # if dp[mask]!=-1:
-            #     return dp[mask]
-            
-            ans = False
-            
-            for i in range(n):
-                if (mask)&(1<<i):   # if this index is previously used, skip it
-                    continue
+            for j in range(k):
+                if arr[j]+curr<=subset_val:
+                    arr[j]+=curr
+                    if recur(idx+1,subset_val):
+                        return True
+                    arr[j]-=curr
+                if arr[j]==0:return False
+        
+        return recur(0,subset_val)
                 
-                if curSum+nums[i]<=subsetVal:   # we take element only if it is less than overall subset sum
-                    ans |= recur(k,mask^(1<<i),curSum+nums[i])      
-
-            
-            # dp[mask]=ans
-            return ans
-        return recur(k,0,0)
-        
-        
-
-        
+                
