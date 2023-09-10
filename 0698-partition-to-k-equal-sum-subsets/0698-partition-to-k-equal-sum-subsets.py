@@ -9,9 +9,9 @@ class Solution:
         
         subsetVal = ss//k
         
-        dp =[-1 for _ in range((1<<n)-1)]
+        # dp =[-1 for _ in range((1<<n)-1)]
         
-        
+        @cache
         def recur(k,mask,curSum):
             if k==0:
                 return mask==(1<<n)-1
@@ -19,8 +19,8 @@ class Solution:
             if curSum == subsetVal:
                 return recur(k-1,mask,0)
             
-            if dp[mask]!=-1:
-                return dp[mask]
+            # if dp[mask]!=-1:
+            #     return dp[mask]
             
             ans = False
             
@@ -32,7 +32,7 @@ class Solution:
                     ans |= recur(k,mask^(1<<i),curSum+nums[i])      
 
             
-            dp[mask]=ans
+            # dp[mask]=ans
             return ans
         return recur(k,0,0)
         
