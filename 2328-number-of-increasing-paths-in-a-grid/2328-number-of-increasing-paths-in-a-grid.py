@@ -5,7 +5,7 @@ class Solution:
         MOD = int(1e9)+7
         dire = [(1,0),(0,1),(0,-1),(-1,0)]
         
-        @lru_cache(None)
+        @cache
         def dfs(i,j):
             
             ans = 1
