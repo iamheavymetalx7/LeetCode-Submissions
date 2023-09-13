@@ -10,15 +10,16 @@ Note that, for canonical LIS, we can also use the Fenwick tree. With k, Fenwick 
 
 It's possible to use a pair of Fenwick trees to answer mini/max queries on [l, r] interval, but the solution would be much more complicated, compared to a segment tree.
 '''
+N = 100001
 class SegmentTree:
-    def __init__(self,n,fn):
-        self.n=n
+    def __init__(self,N,fn):
+        self.N =N
         self.fn=fn
-        self.tree=[0]*(2*self.n)
+        self.tree=[0]*(2*self.N)
     
     def query(self,l,r):
-        l+=self.n
-        r+=self.n
+        l+=self.N
+        r+=self.N
         
         res= 0
         while l<r:
@@ -33,7 +34,7 @@ class SegmentTree:
         return res
     
     def update(self,i,val):
-        i+=self.n
+        i+=self.N
         
         self.tree[i]=val
         
@@ -42,18 +43,20 @@ class SegmentTree:
             self.tree[i]=self.fn(self.tree[2*i],self.tree[2*i+1])
         
         
-        
+'''
+
+https://leetcode.com/problems/longest-increasing-subsequence-ii/discuss/2560103/C%2B%2BJava-Segment-Tree-(Max-Range-Query)
+
+'''     
 
 class Solution:
     def lengthOfLIS(self, nums: List[int], k: int) -> int:
         
         
-        n=max(nums)
-        segtree = SegmentTree(n,max)
+        segtree = SegmentTree(N,max)
         res=0
         
         for num in nums:
-            num-=1
             lis = segtree.query(max(0,num-k),num)
             lis+=1
             res=max(res,lis)
