@@ -4,35 +4,38 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
-
-## now in O(1) space
-
 class Solution:
     def recoverTree(self, root: Optional[TreeNode]) -> None:
         """
         Do not return anything, modify root in-place instead.
         """
+        first,middle,last =[None]*(3)
+        prev = TreeNode(-int(1e18))
         
-        first,sec,prev = [None]*(3)
         
-        def inOrder(root):
-            nonlocal first,sec,prev
-            if not root:
+        def dfs(node):
+            nonlocal first,prev,last,middle
+            if not node:
                 return
             
-            inOrder(root.left)
+            dfs(node.left)
             
-            if prev:
-                if prev.val>root.val:
-                    if not first:
-                        first = prev
-                    sec = root 
-            prev=root
+            if prev is not None and (prev.val > node.val):
+                if first is None:
+                    first = prev
+                    middle = node
             
-            inOrder(root.right)
+                else:
+                    last = node
+                    
+            prev=node
+            
+            dfs(node.right)
         
-        inOrder(root)
-        first.val,sec.val = sec.val,first.val
+        dfs(root)
         
-        
+        if (first and last):
+            first.val,last.val = last.val,first.val
+        elif (first and middle):
+            first.val,middle.val = middle.val, first.val
+                
