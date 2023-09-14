@@ -1,39 +1,66 @@
-## def dfs post order traversal, links for both solutions used:
-'''
-1.https://leetcode.com/problems/create-components-with-same-value/discuss/2706736/Python-Explanation-with-pictures-BFS
-https://leetcode.com/problems/create-components-with-same-value/discuss/2707304/Python3-post-order-dfs
-'''
 class Solution:
     def componentValue(self, nums: List[int], edges: List[List[int]]) -> int:
+        summ = sum(nums)
+        n=len(nums)
+
         
-        tree =[[] for _ in range(len(nums))]
+        g =[[] for _ in range(n)]
+        for x,y in edges:
+            g[x].append(y)
+            g[y].append(x)
         
-        for u,v in edges:
-            tree[u].append(v)
-            tree[v].append(u)
+        divisors =[]
+        for i in range(1,int(math.sqrt(summ))+1):
+            if summ%i==0:
+                if i!=summ//i:
+                    divisors.append(i)
+                    divisors.append(summ//i)
+                else:
+                    divisors.append(i)
+        divisors.sort()
+        # print(divisors)
+        ROOT = 0
+        QUE =deque([ROOT])
+        PARENT =[-1]*(n+1)
+        PARENT[ROOT]=n
+        CHILD = [[] for _ in range(n)]
         
         
-        def fn(u,p):
-            ans = nums[u]
+        TOP_SORT = []
+        
+        
+        
+        
+        while QUE:
+            x = QUE.popleft()
+            TOP_SORT.append(x)
             
-            for v in tree[u]:
-                if v!=p:
-                    ans+=fn(v,u)
-            return 0 if cand == ans else ans
+            for to in g[x]:
+                if PARENT[to]==-1:
+                    PARENT[to]=x
+                    CHILD[x].append(to)
+                    QUE.append(to)
         
-        def divisors(x):
-            div =[]
-            for i in range(1,int(math.sqrt(x))+1):
-                if x%i==0:
-                    div.append(i)
-                if x//i!=i:
-                    div.append(x//i)
-            return sorted(div)
+        # print(TOP_SORT,"topoo")
         
-        summ= sum(nums)
-        
-        possible = divisors(summ)
-        
-        for cand in possible:
-            if summ%cand==0 and fn(0,-1)==0:
-                return summ//cand -1
+        for d in divisors:
+            b = nums[:]
+            ANS =0
+            
+            for x in TOP_SORT[::-1]:
+
+                sc = b[x]
+                
+                for to in CHILD[x]:
+                    sc+=b[to]
+                if sc==d:
+                    ANS+=1
+                    b[x]=0
+                else:
+                    b[x]=sc
+            # print(ANS*d,ANS,d,summ)
+            if ANS*d == summ:
+                return (ANS-1)
+        return 0
+                
+                
