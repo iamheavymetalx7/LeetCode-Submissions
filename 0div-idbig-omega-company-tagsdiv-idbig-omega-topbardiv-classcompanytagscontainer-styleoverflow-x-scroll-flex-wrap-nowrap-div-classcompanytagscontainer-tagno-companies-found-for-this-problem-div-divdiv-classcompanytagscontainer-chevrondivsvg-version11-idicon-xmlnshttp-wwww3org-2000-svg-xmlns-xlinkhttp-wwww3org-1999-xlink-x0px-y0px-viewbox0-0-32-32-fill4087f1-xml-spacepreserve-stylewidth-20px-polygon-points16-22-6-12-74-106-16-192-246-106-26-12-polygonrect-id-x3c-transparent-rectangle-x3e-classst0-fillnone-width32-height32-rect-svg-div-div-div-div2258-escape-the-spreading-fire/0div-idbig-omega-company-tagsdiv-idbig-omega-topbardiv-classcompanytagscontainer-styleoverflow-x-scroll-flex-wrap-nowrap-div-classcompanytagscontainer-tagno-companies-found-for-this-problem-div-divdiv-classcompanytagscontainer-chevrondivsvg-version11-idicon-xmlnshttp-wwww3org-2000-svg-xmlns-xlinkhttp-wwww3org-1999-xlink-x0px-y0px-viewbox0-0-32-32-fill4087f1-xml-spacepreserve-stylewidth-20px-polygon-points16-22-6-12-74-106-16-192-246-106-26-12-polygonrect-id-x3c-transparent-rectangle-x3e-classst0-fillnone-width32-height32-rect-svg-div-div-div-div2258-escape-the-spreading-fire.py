@@ -30,9 +30,7 @@ class Solution:
             q.append((0,0,mid))
             
             d2 =[[INF]*(m) for _ in range(n)]
-            
-            if dist[0][0]<=mid:
-                return False
+
             
             while q:
                 x,y,t = q.popleft()
