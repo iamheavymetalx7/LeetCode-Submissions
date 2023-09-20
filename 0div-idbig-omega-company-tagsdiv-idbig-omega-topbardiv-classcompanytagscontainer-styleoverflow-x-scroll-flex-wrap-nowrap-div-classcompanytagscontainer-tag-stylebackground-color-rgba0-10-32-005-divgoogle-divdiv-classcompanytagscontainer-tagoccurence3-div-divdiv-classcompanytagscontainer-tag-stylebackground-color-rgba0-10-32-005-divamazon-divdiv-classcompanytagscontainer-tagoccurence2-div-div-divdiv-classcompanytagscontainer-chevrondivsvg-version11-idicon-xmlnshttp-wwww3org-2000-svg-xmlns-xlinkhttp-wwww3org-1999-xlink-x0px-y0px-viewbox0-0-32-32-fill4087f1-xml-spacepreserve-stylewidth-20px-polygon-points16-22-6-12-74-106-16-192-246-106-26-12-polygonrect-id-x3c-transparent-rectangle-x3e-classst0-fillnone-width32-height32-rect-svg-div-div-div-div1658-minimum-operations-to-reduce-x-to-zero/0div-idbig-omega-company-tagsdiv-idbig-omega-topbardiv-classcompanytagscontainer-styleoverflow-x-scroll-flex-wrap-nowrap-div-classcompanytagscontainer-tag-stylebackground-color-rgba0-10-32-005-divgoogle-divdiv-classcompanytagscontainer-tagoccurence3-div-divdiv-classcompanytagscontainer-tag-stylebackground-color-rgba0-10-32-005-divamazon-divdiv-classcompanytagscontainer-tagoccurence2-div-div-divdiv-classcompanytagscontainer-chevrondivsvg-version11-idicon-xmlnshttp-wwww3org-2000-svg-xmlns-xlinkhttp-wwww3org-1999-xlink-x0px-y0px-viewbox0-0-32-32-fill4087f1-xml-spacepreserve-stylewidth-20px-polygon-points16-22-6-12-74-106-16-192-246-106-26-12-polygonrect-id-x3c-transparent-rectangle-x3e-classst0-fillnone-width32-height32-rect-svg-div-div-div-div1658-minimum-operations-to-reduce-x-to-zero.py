@@ -11,7 +11,7 @@ class Solution:
         for r in range(n):
             summ+=nums[r]
             
-            while l<=r and summ>tgt:
+            while l<n and summ>tgt:
                 summ-=nums[l]
                 l+=1
             if summ==tgt:
