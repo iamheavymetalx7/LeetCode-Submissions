@@ -1,18 +1,21 @@
 class Solution:
     def longestStrChain(self, words: List[str]) -> int:
-
-        wordSet = set(words)
+        dic=defaultdict(int)
+        words = list(set(words))
+        
+        words.sort(key =len)
+        for i,w in enumerate(words):
+            dic[w]=i
+        n=len(words)
         
         @cache
-        def recur(word):
-            ans =1
-            
-            for i in range(len(word)):
-                predecessor = word[:i]+word[i+1:]
-                
-                if predecessor in wordSet:
-                    ans=max(ans,1+recur(predecessor))
-            return ans
+        def recur(i):
+            cur = words[i]
+            maxi =0
+            for idx in range(len(cur)):
+                new_w = cur[:idx]+cur[idx+1:]
+                if new_w in dic:
+                    maxi = max(maxi, 1+recur(dic[new_w]))
+            return maxi
         
-        
-        return max(recur(w) for w in wordSet)
+        return max(recur(i)+1 for i in range(n))
