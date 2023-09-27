@@ -1,7 +1,7 @@
 def isPerfectSquare(num):
 
     l=-1
-    r = int(1e10)
+    r = num+1
 
     while r-l>1:
         m =(l+r)//2
