@@ -2,25 +2,22 @@ class Solution:
     def minSessions(self, tasks: List[int], sessionTime: int) -> int:
         n =len(tasks)
         inf = int(1e19)
-        maxi = max(tasks)
-        ## 2^n*n*sessionTime
-        dp = [[-1]*((1<<n)+10) for _ in range(maxi*n)]
+        mx = (1<<n)-1
         
-        def recur(curr,mask):
-            if mask==((1<<n)-1):
-                return 0
-            if dp[curr][mask]!=-1:
-                return dp[curr][mask]
-            ans = inf
+        ## time complexity : 2^n * n
+        @cache
+        def dp(mask):
+            if mask==mx:
+                return (1,0)
             
-            for i in range(n):
-                if mask&(1<<i)==0:
-                    if curr+tasks[i]<=sessionTime:
-                        ans = min(ans,recur(curr+tasks[i],mask^(1<<i)))
-                    else:
-                        ans = min(ans,1+recur(tasks[i],mask^(1<<i)))
-            dp[curr][mask] = ans
-            return dp[curr][mask]
+            ans = (inf,inf)
+            
+            for j in range(n):
+                if mask&(1<<j)==0:
+                    pieces,last = dp(mask^(1<<j))
+                    full = (last+tasks[j] > sessionTime)
+                    ans = min(ans,(pieces+full, tasks[j]+(1-full)*last))
+            return ans
         
-        val = recur(0,0)
-        return val+1
+        val = dp(0)
+        return val[0]
