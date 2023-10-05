@@ -7,15 +7,14 @@ class Solution:
             return False
         
         @cache
-        def recur(mask,target):
-            if target<=0:       ## mtlb next banda har rha h
-                return 0
+        def recur(mask,tgt):
+            if tgt<=0:
+                return False
             
             for i in range(maxChoosableInteger):
-                if not mask&(1<<i):
-                    if not recur(mask^(1<<i), target-(i+1)):
+                if not (mask&(1<<i)):
+                    if not recur(mask^(1<<i),tgt-(i+1)):
                         return True
             return False
-    
-        ans = recur(0,desiredTotal)
-        return ans
+        
+        return recur(0,desiredTotal)
