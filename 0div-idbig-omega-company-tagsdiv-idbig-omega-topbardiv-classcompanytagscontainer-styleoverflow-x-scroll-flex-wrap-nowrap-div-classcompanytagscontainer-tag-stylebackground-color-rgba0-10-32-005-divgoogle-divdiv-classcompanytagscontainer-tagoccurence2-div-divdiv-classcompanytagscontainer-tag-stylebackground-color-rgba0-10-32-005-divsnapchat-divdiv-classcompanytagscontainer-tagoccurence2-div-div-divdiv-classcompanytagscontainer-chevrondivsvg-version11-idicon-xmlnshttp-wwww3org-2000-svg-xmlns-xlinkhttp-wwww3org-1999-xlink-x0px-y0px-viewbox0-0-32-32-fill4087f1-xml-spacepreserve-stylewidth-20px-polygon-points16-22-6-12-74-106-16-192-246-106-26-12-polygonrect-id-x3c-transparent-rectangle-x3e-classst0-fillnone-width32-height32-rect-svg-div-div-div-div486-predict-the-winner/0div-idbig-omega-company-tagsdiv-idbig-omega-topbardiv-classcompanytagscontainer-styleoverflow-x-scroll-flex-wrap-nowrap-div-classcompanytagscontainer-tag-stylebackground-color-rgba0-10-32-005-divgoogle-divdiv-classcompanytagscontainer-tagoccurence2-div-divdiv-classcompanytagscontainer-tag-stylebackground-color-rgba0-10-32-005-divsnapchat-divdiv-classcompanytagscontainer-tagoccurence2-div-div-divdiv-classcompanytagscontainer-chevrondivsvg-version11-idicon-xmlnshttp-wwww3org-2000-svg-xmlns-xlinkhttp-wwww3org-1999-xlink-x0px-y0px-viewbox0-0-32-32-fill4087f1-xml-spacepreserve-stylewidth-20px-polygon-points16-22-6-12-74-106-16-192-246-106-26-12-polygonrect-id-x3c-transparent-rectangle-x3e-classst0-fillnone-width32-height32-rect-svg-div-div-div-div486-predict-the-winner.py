@@ -3,7 +3,7 @@ class Solution:
         
         
         n = len(nums)
-        
+        @cache
         def recur(i,j):
             if i>j:
                 return 0
