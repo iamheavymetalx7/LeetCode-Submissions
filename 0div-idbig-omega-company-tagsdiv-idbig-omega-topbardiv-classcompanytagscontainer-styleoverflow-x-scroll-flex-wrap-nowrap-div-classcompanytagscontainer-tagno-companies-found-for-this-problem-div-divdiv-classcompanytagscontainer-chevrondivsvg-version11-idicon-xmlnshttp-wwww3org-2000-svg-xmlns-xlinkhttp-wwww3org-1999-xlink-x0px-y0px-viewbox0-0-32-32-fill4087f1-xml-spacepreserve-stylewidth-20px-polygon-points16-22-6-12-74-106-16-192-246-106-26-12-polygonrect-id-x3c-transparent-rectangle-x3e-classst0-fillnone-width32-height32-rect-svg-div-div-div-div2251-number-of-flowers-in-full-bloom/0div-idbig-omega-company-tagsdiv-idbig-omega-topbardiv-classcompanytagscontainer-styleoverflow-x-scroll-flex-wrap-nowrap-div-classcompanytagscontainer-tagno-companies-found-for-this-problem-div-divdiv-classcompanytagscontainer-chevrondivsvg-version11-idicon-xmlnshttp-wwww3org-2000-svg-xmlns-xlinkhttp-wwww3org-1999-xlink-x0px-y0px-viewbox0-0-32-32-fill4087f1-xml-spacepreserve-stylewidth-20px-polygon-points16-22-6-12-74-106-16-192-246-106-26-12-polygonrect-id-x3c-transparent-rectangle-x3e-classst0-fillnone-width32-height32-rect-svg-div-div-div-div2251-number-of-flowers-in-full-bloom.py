@@ -1,22 +1,32 @@
+from sortedcontainers import SortedDict
 class Solution:
     def fullBloomFlowers(self, flowers, people) -> List[int]:
-        flowers.sort()
-        sorted_people  = sorted(people)
+        diff = defaultdict()
+        diff[0]=0
         
-        heap =[]
-        i=0
-        dic= defaultdict()
-        for person in sorted_people:
-            while i<len(flowers) and flowers[i][0]<=person:
-                heappush(heap,flowers[i][1])
-                i+=1
-            
-            
-            while heap and heap[0]<person:
-                heappop(heap)
-            
-            dic[person] = len(heap)
-            
-            
-        ans = [dic[x] for x in people]
+        for s,e in flowers:
+            if s in diff:
+                diff[s]+=1
+            else:
+                diff[s]=1
+            if (e+1) in diff:
+                diff[e+1]-=1
+            else:
+                diff[e+1]=-1
+        
+        positions =[]
+        prefix =[]
+        curr=0
+        
+        for key in sorted(diff.keys()):
+            positions.append(key)
+            curr+=diff[key]
+            prefix.append(curr)
+        
+        ans =[]
+        
+        
+        for person in people:
+            i = bisect_right(positions,person)-1
+            ans.append(prefix[i])
         return ans
